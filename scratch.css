@@ -273,7 +273,13 @@ header h1 {
     max-width: 100%;
 }
 
-/* --- Tableau Section --- */
+.video-caption {
+    margin-top: 14px;
+    color: var(--light-blue);
+    font-size: 0.95rem;
+    font-style: italic;
+    letter-spacing: 0.05em;
+}
 .tableau-section {
     padding: 60px 10%;
     background: var(--white);
