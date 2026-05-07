@@ -30,6 +30,35 @@ body {
     line-height: 1.7;
 }
 
+/* --- Flag Ticker --- */
+.flag-ticker-wrap {
+    overflow: hidden;
+    background: var(--dark-blue);
+    padding: 12px 0;
+    width: 100%;
+}
+
+.flag-ticker {
+    display: flex;
+    gap: 12px;
+    width: max-content;
+    animation: ticker-scroll 40s linear infinite;
+}
+
+.ticker-flag {
+    height: 40px;
+    width: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.2);
+    flex-shrink: 0;
+}
+
+@keyframes ticker-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
 /* --- Navigation --- */
 nav {
     background-color: var(--dark-blue);

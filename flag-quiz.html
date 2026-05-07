@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flag Quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-blue: #1a3a5c;
+            --light-blue: #7eb8d4;
+            --pale-blue: #e8f4f8;
+            --white: #ffffff;
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Raleway', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(135deg, var(--dark-blue) 0%, #2a5f8f 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--white);
+        }
+
+        nav {
+            width: 100%;
+            background: rgba(0,0,0,0.2);
+            padding: 14px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--light-blue);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover { color: var(--white); }
+
+        .nav-title {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+        }
+
+        .quiz-container {
+            max-width: 560px;
+            width: 90%;
+            margin: 40px auto;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: var(--light-blue);
+            font-size: 1rem;
+            margin-bottom: 32px;
+            font-weight: 300;
+        }
+
+        /* Game screen */
+        .progress-bar-wrap {
+            background: rgba(255,255,255,0.15);
+            border-radius: 50px;
+            height: 8px;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--light-blue);
+            border-radius: 50px;
+            transition: width 0.4s ease;
+        }
+
+        .q-counter {
+            font-size: 0.85rem;
+            color: var(--light-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .flag-wrap {
+            background: rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 180px;
+        }
+
+        .flag-img {
+            width: 280px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.15);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .option-btn {
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            border: 2px solid rgba(255,255,255,0.2);
+            padding: 16px 12px;
+            border-radius: 12px;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.15s, transform 0.1s, border-color 0.15s;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            background: rgba(255,255,255,0.2);
+            border-color: var(--light-blue);
+            transform: translateY(-2px);
+        }
+
+        .option-btn.correct {
+            background: #2d7a2d !important;
+            border-color: #1a5c1a !important;
+        }
+
+        .option-btn.wrong {
+            background: #c0392b !important;
+            border-color: #922b21 !important;
+        }
+
+        .feedback {
+            font-size: 1.1rem;
+            font-weight: 600;
+            min-height: 28px;
+            margin-bottom: 8px;
+        }
+
+        /* Score display */
+        .score-display {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .score-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transition: background 0.3s;
+        }
+
+        .score-dot.correct { background: #2d7a2d; }
+        .score-dot.wrong { background: #c0392b; }
+
+        /* Results screen */
+        #results-screen {
+            display: none;
+        }
+
+        .results-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 40px 32px;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .big-score {
+            font-family: var(--font-display);
+            font-size: 5rem;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .score-label {
+            color: var(--light-blue);
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .score-msg {
+            font-size: 1.15rem;
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+        .result-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s, opacity 0.2s;
+            border: none;
+        }
+
+        .btn:hover { transform: translateY(-2px); opacity: 0.9; }
+
+        .btn-primary {
+            background: var(--light-blue);
+            color: var(--dark-blue);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.15);
+            color: var(--white);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="scratch.html">← Back to Travel Map</a>
+        <span class="nav-title">Flag Quiz</span>
+        <span></span>
+    </nav>
+
+    <div class="quiz-container">
+        <h1>🌍 Flag Quiz</h1>
+        <p class="subtitle">Can you name the country from its flag?</p>
+
+        <!-- Game Screen -->
+        <div id="game-screen">
+            <div class="progress-bar-wrap">
+                <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+            </div>
+
+            <div class="q-counter">Question <span id="q-num">1</span> of 10</div>
+
+            <!-- Score dots -->
+            <div class="score-display" id="score-dots"></div>
+
+            <div class="flag-wrap">
+                <img id="flag-img" src="" alt="Flag" class="flag-img" />
+            </div>
+
+            <div class="options-grid" id="options-grid"></div>
+            <p class="feedback" id="feedback"></p>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen">
+            <div class="results-card">
+                <div class="big-score" id="big-score"></div>
+                <div class="score-label">out of 10</div>
+                <p class="score-msg" id="score-msg"></p>
+                <div class="result-buttons">
+                    <a href="scratch.html" class="btn btn-secondary">← Back to Map</a>
+                    <button class="btn btn-primary" onclick="startGame()">Play Again</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const countries = [
+            {name:"Afghanistan",code:"af"},{name:"Albania",code:"al"},{name:"Algeria",code:"dz"},
+            {name:"Argentina",code:"ar"},{name:"Australia",code:"au"},{name:"Austria",code:"at"},
+            {name:"Belgium",code:"be"},{name:"Brazil",code:"br"},{name:"Canada",code:"ca"},
+            {name:"Chile",code:"cl"},{name:"China",code:"cn"},{name:"Colombia",code:"co"},
+            {name:"Croatia",code:"hr"},{name:"Czech Republic",code:"cz"},{name:"Denmark",code:"dk"},
+            {name:"Egypt",code:"eg"},{name:"Finland",code:"fi"},{name:"France",code:"fr"},
+            {name:"Germany",code:"de"},{name:"Greece",code:"gr"},{name:"Hungary",code:"hu"},
+            {name:"Iceland",code:"is"},{name:"India",code:"in"},{name:"Indonesia",code:"id"},
+            {name:"Ireland",code:"ie"},{name:"Israel",code:"il"},{name:"Italy",code:"it"},
+            {name:"Japan",code:"jp"},{name:"Kenya",code:"ke"},{name:"Malaysia",code:"my"},
+            {name:"Mexico",code:"mx"},{name:"Morocco",code:"ma"},{name:"Netherlands",code:"nl"},
+            {name:"New Zealand",code:"nz"},{name:"Nigeria",code:"ng"},{name:"Norway",code:"no"},
+            {name:"Peru",code:"pe"},{name:"Philippines",code:"ph"},{name:"Poland",code:"pl"},
+            {name:"Portugal",code:"pt"},{name:"Romania",code:"ro"},{name:"Russia",code:"ru"},
+            {name:"Saudi Arabia",code:"sa"},{name:"Singapore",code:"sg"},{name:"South Africa",code:"za"},
+            {name:"South Korea",code:"kr"},{name:"Spain",code:"es"},{name:"Sweden",code:"se"},
+            {name:"Switzerland",code:"ch"},{name:"Thailand",code:"th"},{name:"Turkey",code:"tr"},
+            {name:"Ukraine",code:"ua"},{name:"United Kingdom",code:"gb"},{name:"United States",code:"us"},
+            {name:"Vietnam",code:"vn"},{name:"Zimbabwe",code:"zw"},{name:"Tanzania",code:"tz"},
+            {name:"Cambodia",code:"kh"},{name:"Sri Lanka",code:"lk"},{name:"Taiwan",code:"tw"},
+            {name:"Belize",code:"bz"},{name:"Botswana",code:"bw"},{name:"Costa Rica",code:"cr"},
+            {name:"Guatemala",code:"gt"},{name:"Iceland",code:"is"},{name:"Kenya",code:"ke"},
+            {name:"Malta",code:"mt"},{name:"Mauritius",code:"mu"},{name:"Namibia",code:"na"},
+            {name:"Seychelles",code:"sc"},{name:"Slovenia",code:"si"},{name:"Zambia",code:"zm"}
+        ];
+
+        let currentQ = 0;
+        let score = 0;
+        let quizCountries = [];
+        let answered = false;
+        let results = [];
+
+        function shuffle(arr) {
+            return [...arr].sort(() => Math.random() - 0.5);
+        }
+
+        function startGame() {
+            currentQ = 0;
+            score = 0;
+            answered = false;
+            results = [];
+            quizCountries = shuffle(countries).slice(0, 10);
+            document.getElementById('game-screen').style.display = 'block';
+            document.getElementById('results-screen').style.display = 'none';
+            buildScoreDots();
+            loadQuestion();
+        }
+
+        function buildScoreDots() {
+            const dots = document.getElementById('score-dots');
+            dots.innerHTML = '';
+            for (let i = 0; i < 10; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'score-dot';
+                dot.id = `dot-${i}`;
+                dots.appendChild(dot);
+            }
+        }
+
+        function loadQuestion() {
+            answered = false;
+            const correct = quizCountries[currentQ];
+            document.getElementById('q-num').textContent = currentQ + 1;
+            document.getElementById('progress-bar').style.width = `${(currentQ / 10) * 100}%`;
+            document.getElementById('flag-img').src = `https://flagcdn.com/w320/${correct.code}.png`;
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('feedback').style.color = '';
+
+            const others = shuffle(countries.filter(c => c.code !== correct.code)).slice(0, 3);
+            const options = shuffle([correct, ...others]);
+
+            const grid = document.getElementById('options-grid');
+            grid.innerHTML = '';
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.textContent = opt.name;
+                btn.className = 'option-btn';
+                btn.onclick = () => checkAnswer(btn, opt.name, correct.name);
+                grid.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(btn, selected, correct) {
+            if (answered) return;
+            answered = true;
+
+            const allBtns = document.querySelectorAll('.option-btn');
+            allBtns.forEach(b => {
+                b.disabled = true;
+                if (b.textContent === correct) b.classList.add('correct');
+            });
+
+            const dot = document.getElementById(`dot-${currentQ}`);
+
+            if (selected === correct) {
+                btn.classList.add('correct');
+                score++;
+                dot.classList.add('correct');
+                document.getElementById('feedback').textContent = '✓ Correct!';
+                document.getElementById('feedback').style.color = '#6fcf6f';
+            } else {
+                btn.classList.add('wrong');
+                dot.classList.add('wrong');
+                document.getElementById('feedback').textContent = `✗ It was ${correct}`;
+                document.getElementById('feedback').style.color = '#ef8a82';
+            }
+
+            setTimeout(() => {
+                currentQ++;
+                if (currentQ < 10) {
+                    loadQuestion();
+                } else {
+                    showResults();
+                }
+            }, 1200);
+        }
+
+        function showResults() {
+            document.getElementById('progress-bar').style.width = '100%';
+            document.getElementById('game-screen').style.display = 'none';
+            document.getElementById('results-screen').style.display = 'block';
+            document.getElementById('big-score').textContent = score;
+
+            const msgs = {
+                10: "Perfect score! You're a geography genius! 🌟",
+                9:  "Almost perfect — incredible knowledge! 🎉",
+                8:  "Great job, world traveller! 🌍",
+                7:  "Solid effort! Keep exploring! ✈️",
+                6:  "Not bad! A few more trips needed! 🗺️",
+                5:  "Halfway there — keep practising! 🧭",
+                4:  "Room to grow — get travelling! 🌏",
+                3:  "Time to book some flights! ✈️",
+            };
+            document.getElementById('score-msg').textContent = msgs[score] || "Keep travelling and learning! 🌏";
+        }
+
+        startGame();
+    </script>
+
+</body>
+</html>
