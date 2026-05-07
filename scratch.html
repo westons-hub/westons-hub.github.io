@@ -97,6 +97,18 @@
         <a href="app.html" class="app-button">Launch Travel App →</a>
     </section>
 
+    <!-- US Map Section -->
+    <a name="us-map"></a>
+    <section class="map-section" style="background: var(--pale-blue);">
+        <h2>United States</h2>
+        <div class="us-stats">
+            <div class="stat-box"><span class="stat-number">34</span><span class="stat-label">States Visited</span></div>
+            <div class="stat-box"><span class="stat-number">7</span><span class="stat-label">States Lived In</span></div>
+            <div class="stat-box"><span class="stat-number">16</span><span class="stat-label">Still To Go</span></div>
+        </div>
+        <div id="us-map"></div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <a href="#top">↑ Back to Top</a>
@@ -164,6 +176,60 @@
                         layer.on('mouseover', function() { this.openPopup(); });
                     }
                 }).addTo(map);
+            });
+
+        // ===== US MAP =====
+        const usMap = L.map('us-map', {
+            center: [38, -96],
+            zoom: 4,
+            minZoom: 3,
+            maxZoom: 7,
+            scrollWheelZoom: false
+        });
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+            attribution: '© OpenStreetMap © CARTO'
+        }).addTo(usMap);
+
+        // States lived in
+        const statesLived = [
+            "California", "Connecticut", "Massachusetts", "North Carolina", "Utah", "Virginia", "Washington"
+        ];
+
+        // States visited
+        const statesVisited = [
+            "Arizona", "Arkansas", "Colorado", "Delaware", "Florida", "Georgia", "Idaho",
+            "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Maryland", "Missouri",
+            "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico",
+            "New York", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island",
+            "South Carolina", "South Dakota", "Tennessee", "Texas", "West Virginia",
+            "Wisconsin", "Wyoming"
+        ];
+
+        // Style function for US states
+        function getStateStyle(feature) {
+            const name = feature.properties.NAME || feature.properties.name;
+            if (statesLived.includes(name)) {
+                return { fillColor: '#1a3a5c', fillOpacity: 0.85, color: '#fff', weight: 1 };
+            } else if (statesVisited.includes(name)) {
+                return { fillColor: '#7eb8d4', fillOpacity: 0.75, color: '#fff', weight: 1 };
+            } else {
+                return { fillColor: '#f0f4f8', fillOpacity: 0.9, color: '#ccc', weight: 0.8 };
+            }
+        }
+
+        // Load US states GeoJSON
+        fetch('https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json')
+            .then(res => res.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    style: getStateStyle,
+                    onEachFeature: function(feature, layer) {
+                        const name = feature.properties.NAME || feature.properties.name;
+                        layer.bindPopup('<strong>' + name + '</strong>');
+                        layer.on('mouseover', function() { this.openPopup(); });
+                    }
+                }).addTo(usMap);
             });
     </script>
 
