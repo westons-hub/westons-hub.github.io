@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Map</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="scratch.css">
+</head>
+<body>
+
+    <!-- Navigation back to professional pages -->
+    <nav>
+        <a href="index.html">← Back to Home</a>
+        <span class="nav-title">Travel Map</span>
+        <a href="#us-map">US Map ↓</a>
+    </nav>
+
+    <!-- Hero Header -->
+    <header id="top">
+        <div class="header-content">
+            <h1>Travel Map</h1>
+            <p class="subtitle">67 countries · 7 continents · countless memories</p>
+        </div>
+    </header>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stat-box">
+            <span class="stat-number">67</span>
+            <span class="stat-label">Countries Visited</span>
+        </div>
+        <div class="stat-box">
+            <span class="stat-number">7</span>
+            <span class="stat-label">Countries Lived In</span>
+        </div>
+        <div class="stat-box">
+            <span class="stat-number">6</span>
+            <span class="stat-label">Continents</span>
+        </div>
+    </section>
+
+    <!-- Legend -->
+    <div class="legend">
+        <div class="legend-item"><span class="legend-color lived"></span> Lived Here</div>
+        <div class="legend-item"><span class="legend-color visited"></span> Visited</div>
+        <div class="legend-item"><span class="legend-color not-visited"></span> Not Yet</div>
+    </div>
+
+    <!-- World Map -->
+    <section class="map-section">
+        <h2>World Map</h2>
+        <div id="world-map"></div>
+    </section>
+
+    <!-- Anchor for on-page navigation -->
+    <a name="countries"></a>
+
+    <!-- Countries Visited List -->
+    <section class="list-section">
+        <h2>Countries I've Explored</h2>
+        <p class="section-intro">Organized by continent — click any region to explore.</p>
+
+        <!-- Ordered list of continents with nested unordered lists of countries -->
+        <ol class="continent-list">
+            <li>
+                <strong>Europe</strong>
+                <ul>
+                    <li>Austria</li>
+                    <li>Belgium</li>
+                    <li>Croatia</li>
+                    <li>Cyprus</li>
+                    <li>Czech Republic</li>
+                    <li>Denmark</li>
+                    <li>England</li>
+                    <li>France</li>
+                    <li>Germany</li>
+                    <li>Greece</li>
+                    <li>Hungary</li>
+                    <li>Iceland</li>
+                    <li>Ireland 🏠</li>
+                    <li>Italy 🏠</li>
+                    <li>Malta</li>
+                    <li>Netherlands</li>
+                    <li>Norway</li>
+                    <li>Poland</li>
+                    <li>Portugal</li>
+                    <li>Scotland</li>
+                    <li>Slovenia</li>
+                    <li>Spain</li>
+                    <li>Switzerland</li>
+                    <li>Turkey</li>
+                    <li>Vatican City</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Asia</strong>
+                <ul>
+                    <li>Cambodia</li>
+                    <li>China 🏠</li>
+                    <li>Hong Kong</li>
+                    <li>India</li>
+                    <li>Israel</li>
+                    <li>Japan</li>
+                    <li>Malaysia</li>
+                    <li>Palestine</li>
+                    <li>Philippines 🏠</li>
+                    <li>Singapore 🏠</li>
+                    <li>Sri Lanka</li>
+                    <li>Taiwan</li>
+                    <li>Thailand</li>
+                    <li>United Arab Emirates</li>
+                    <li>Vietnam</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Africa</strong>
+                <ul>
+                    <li>Botswana</li>
+                    <li>Egypt</li>
+                    <li>Kenya</li>
+                    <li>Mauritius 🏠</li>
+                    <li>Morocco</li>
+                    <li>Namibia</li>
+                    <li>Seychelles</li>
+                    <li>South Africa</li>
+                    <li>Tanzania</li>
+                    <li>Zambia</li>
+                    <li>Zimbabwe</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Americas</strong>
+                <ul>
+                    <li>Belize</li>
+                    <li>Canada</li>
+                    <li>Costa Rica</li>
+                    <li>Curaçao</li>
+                    <li>Dominican Republic</li>
+                    <li>Guatemala</li>
+                    <li>Mexico</li>
+                    <li>USA 🏠</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Oceania</strong>
+                <ul>
+                    <li>Australia</li>
+                    <li>Cook Islands</li>
+                    <li>Maldives</li>
+                    <li>New Caledonia</li>
+                    <li>New Zealand</li>
+                    <li>Solomon Islands</li>
+                    <li>Vanuatu</li>
+                </ul>
+            </li>
+        </ol>
+        <p class="legend-note">🏠 = Lived here</p>
+    </section>
+
+    <!-- Favorite Travel Video -->
+    <section class="video-section">
+        <h2>What Travel Means to Me</h2>
+        <p>There's nothing quite like exploring the world. Here's some inspiration:</p>
+        <div class="video-wrapper">
+            <iframe width="560" height="315"
+                src="https://www.youtube.com/embed/mFyNkSqtMxs"
+                title="Travel the World"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </section>
+
+    <!-- Tableau Embed Placeholder -->
+    <section class="tableau-section">
+        <h2>Travel by the Numbers</h2>
+        <p>Interactive visualization of my travels around the world.</p>
+        <div class="tableau-placeholder">
+            <!-- Replace this div with your Tableau embed code -->
+            <div class='tableauPlaceholder' id='viz1' style='position: relative'>
+                <p style="color:#888; font-size:1rem;">[ Paste your Tableau embed code here ]</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Web App Link -->
+    <section class="app-section">
+        <h2>Where Should I Go Next?</h2>
+        <p>Try my travel recommendation app to find your next destination!</p>
+        <a href="app.html" class="app-button">Launch Travel App →</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <a href="#top">↑ Back to Top</a>
+        <p>© 2026 Weston Jackson · Travel Map</p>
+    </footer>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        // Initialize world map
+        const map = L.map('world-map', {
+            center: [20, 0],
+            zoom: 2,
+            minZoom: 1,
+            maxZoom: 6,
+            scrollWheelZoom: false
+        });
+
+        // Add tile layer (light, clean style)
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+            attribution: '© OpenStreetMap © CARTO'
+        }).addTo(map);
+
+        // Countries lived in
+        const livedIn = [
+            "Ireland", "Mauritius", "China", "Philippines", "Singapore", "Italy", "United States of America"
+        ];
+
+        // Countries visited
+        const visited = [
+            "Austria", "Australia", "Belgium", "Belize", "Botswana", "Cambodia", "Canada",
+            "Croatia", "Cyprus", "Czech Republic", "Denmark", "Dominican Republic", "Egypt",
+            "France", "Germany", "Greece", "Guatemala", "Hungary", "Iceland", "India",
+            "Israel", "Japan", "Kenya", "Malaysia", "Maldives", "Malta", "Morocco",
+            "Namibia", "Netherlands", "New Zealand", "Norway", "Palestine", "Philippines",
+            "Poland", "Portugal", "Scotland", "Seychelles", "Slovenia", "South Africa",
+            "Spain", "Sri Lanka", "Switzerland", "Taiwan", "Tanzania", "Thailand",
+            "Turkey", "United Arab Emirates", "Vanuatu", "Vatican City", "Vietnam",
+            "Zambia", "Zimbabwe", "Curaçao", "New Caledonia", "Cook Islands",
+            "Solomon Islands", "Hong Kong", "Mexico", "Costa Rica", "United Kingdom"
+        ];
+
+        // Style function
+        function getStyle(feature) {
+            const name = feature.properties.ADMIN || feature.properties.name;
+            if (livedIn.includes(name)) {
+                return { fillColor: '#1a3a5c', fillOpacity: 0.85, color: '#fff', weight: 0.8 };
+            } else if (visited.some(v => name && name.includes(v)) || visited.some(v => v && v.includes(name))) {
+                return { fillColor: '#7eb8d4', fillOpacity: 0.75, color: '#fff', weight: 0.8 };
+            } else {
+                return { fillColor: '#f0f4f8', fillOpacity: 0.9, color: '#ccc', weight: 0.5 };
+            }
+        }
+
+        // Load GeoJSON world data
+        fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson')
+            .then(res => res.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    style: getStyle,
+                    onEachFeature: function(feature, layer) {
+                        const name = feature.properties.ADMIN || feature.properties.name;
+                        layer.bindPopup('<strong>' + name + '</strong>');
+                        layer.on('mouseover', function() { this.openPopup(); });
+                    }
+                }).addTo(map);
+            });
+    </script>
+
+</body>
+</html>
