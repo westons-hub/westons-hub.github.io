@@ -368,6 +368,97 @@ footer a:hover {
     color: var(--white);
 }
 
+/* --- Flag Game --- */
+.quiz-progress {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.flag-img {
+    width: 280px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    margin-bottom: 24px;
+    border: 2px solid rgba(255,255,255,0.2);
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    max-width: 480px;
+    margin: 0 auto 16px;
+}
+
+.option-btn {
+    background: var(--dark-blue);
+    color: var(--white);
+    border: 2px solid transparent;
+    padding: 14px 16px;
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+}
+
+.option-btn:hover:not(:disabled) {
+    background: #2a5f8f;
+    transform: translateY(-2px);
+}
+
+.option-btn.correct {
+    background: #2d7a2d !important;
+    border-color: #1a5c1a;
+}
+
+.option-btn.wrong {
+    background: #c0392b !important;
+    border-color: #922b21;
+}
+
+.feedback {
+    font-size: 1.1rem;
+    font-weight: 600;
+    min-height: 28px;
+    margin-top: 8px;
+}
+
+.result-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
+
+.result-buttons button.app-button {
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 1rem;
+}
+
+#score-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--white);
+    margin-bottom: 12px;
+}
+
+#score-msg {
+    font-size: 1.1rem;
+    color: var(--light-blue);
+    margin-bottom: 8px;
+}
+
+/* --- US Map --- */
 #us-map {
     height: 480px;
     width: 100%;

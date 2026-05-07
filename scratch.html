@@ -67,7 +67,7 @@
     <section class="video-section">
         <h2>A Favourite Memory</h2>
         <div class="video-wrapper">
-            <iframe width="400" height="225"
+            <iframe width="720" height="405"
                 src="https://www.youtube.com/embed/NL8la8YVE08"
                 title="Kyoto - Tokyo, Japan"
                 frameborder="0"
@@ -83,18 +83,34 @@
         <h2>Travel by the Numbers</h2>
         <p>Interactive visualization of my travels around the world.</p>
         <div class="tableau-placeholder">
-            <!-- Replace this div with your Tableau embed code -->
             <div class='tableauPlaceholder' id='viz1' style='position: relative'>
                 <p style="color:#888; font-size:1rem;">[ Paste your Tableau embed code here ]</p>
             </div>
         </div>
     </section>
 
-    <!-- Web App Link -->
+    <!-- Flag Guessing Game -->
     <section class="app-section">
-        <h2>Where Should I Go Next?</h2>
-        <p>Try my travel recommendation app to find your next destination!</p>
-        <a href="app.html" class="app-button">Launch Travel App →</a>
+        <h2>🌍 Flag Quiz</h2>
+        <p>How well do you know the world's flags? Test yourself!</p>
+
+        <!-- Game Screen -->
+        <div id="game-screen">
+            <div class="quiz-progress">Question <span id="q-num">1</span> of 10</div>
+            <img id="flag-img" src="" alt="Flag" class="flag-img" />
+            <div id="options-grid" class="options-grid"></div>
+            <p id="feedback" class="feedback"></p>
+        </div>
+
+        <!-- Results Screen (hidden initially) -->
+        <div id="results-screen" style="display:none;">
+            <h3 id="score-title"></h3>
+            <p id="score-msg"></p>
+            <div class="result-buttons">
+                <a href="#top" class="app-button">↑ Back to Top</a>
+                <button class="app-button" onclick="startGame()">Play Again</button>
+            </div>
+        </div>
     </section>
 
     <!-- US Map Section -->
@@ -102,9 +118,9 @@
     <section class="map-section" style="background: var(--pale-blue);">
         <h2>United States</h2>
         <div class="us-stats">
-            <div class="stat-box"><span class="stat-number">34</span><span class="stat-label">States Visited</span></div>
+            <div class="stat-box"><span class="stat-number">40</span><span class="stat-label">States Visited</span></div>
             <div class="stat-box"><span class="stat-number">7</span><span class="stat-label">States Lived In</span></div>
-            <div class="stat-box"><span class="stat-number">16</span><span class="stat-label">Still To Go</span></div>
+            <div class="stat-box"><span class="stat-number">10</span><span class="stat-label">Still To Go</span></div>
         </div>
         <div id="us-map"></div>
     </section>
@@ -231,6 +247,120 @@
                     }
                 }).addTo(usMap);
             });
+
+        // ===== FLAG QUIZ GAME =====
+        const countries = [
+            {name:"Afghanistan",code:"af"},{name:"Albania",code:"al"},{name:"Algeria",code:"dz"},
+            {name:"Argentina",code:"ar"},{name:"Australia",code:"au"},{name:"Austria",code:"at"},
+            {name:"Belgium",code:"be"},{name:"Brazil",code:"br"},{name:"Canada",code:"ca"},
+            {name:"Chile",code:"cl"},{name:"China",code:"cn"},{name:"Colombia",code:"co"},
+            {name:"Croatia",code:"hr"},{name:"Czech Republic",code:"cz"},{name:"Denmark",code:"dk"},
+            {name:"Egypt",code:"eg"},{name:"Finland",code:"fi"},{name:"France",code:"fr"},
+            {name:"Germany",code:"de"},{name:"Greece",code:"gr"},{name:"Hungary",code:"hu"},
+            {name:"Iceland",code:"is"},{name:"India",code:"in"},{name:"Indonesia",code:"id"},
+            {name:"Ireland",code:"ie"},{name:"Israel",code:"il"},{name:"Italy",code:"it"},
+            {name:"Japan",code:"jp"},{name:"Kenya",code:"ke"},{name:"Malaysia",code:"my"},
+            {name:"Mexico",code:"mx"},{name:"Morocco",code:"ma"},{name:"Netherlands",code:"nl"},
+            {name:"New Zealand",code:"nz"},{name:"Nigeria",code:"ng"},{name:"Norway",code:"no"},
+            {name:"Peru",code:"pe"},{name:"Philippines",code:"ph"},{name:"Poland",code:"pl"},
+            {name:"Portugal",code:"pt"},{name:"Romania",code:"ro"},{name:"Russia",code:"ru"},
+            {name:"Saudi Arabia",code:"sa"},{name:"Singapore",code:"sg"},{name:"South Africa",code:"za"},
+            {name:"South Korea",code:"kr"},{name:"Spain",code:"es"},{name:"Sweden",code:"se"},
+            {name:"Switzerland",code:"ch"},{name:"Thailand",code:"th"},{name:"Turkey",code:"tr"},
+            {name:"Ukraine",code:"ua"},{name:"United Kingdom",code:"gb"},{name:"United States",code:"us"},
+            {name:"Vietnam",code:"vn"},{name:"Zimbabwe",code:"zw"},{name:"Tanzania",code:"tz"},
+            {name:"Cambodia",code:"kh"},{name:"Sri Lanka",code:"lk"},{name:"Taiwan",code:"tw"}
+        ];
+
+        let currentQ = 0;
+        let score = 0;
+        let quizCountries = [];
+        let answered = false;
+
+        function shuffle(arr) {
+            return arr.sort(() => Math.random() - 0.5);
+        }
+
+        function startGame() {
+            currentQ = 0;
+            score = 0;
+            answered = false;
+            quizCountries = shuffle([...countries]).slice(0, 10);
+            document.getElementById('game-screen').style.display = 'block';
+            document.getElementById('results-screen').style.display = 'none';
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            answered = false;
+            const correct = quizCountries[currentQ];
+            document.getElementById('q-num').textContent = currentQ + 1;
+            document.getElementById('flag-img').src = `https://flagcdn.com/w320/${correct.code}.png`;
+            document.getElementById('feedback').textContent = '';
+
+            // Get 3 wrong answers
+            const others = shuffle(countries.filter(c => c.code !== correct.code)).slice(0, 3);
+            const options = shuffle([correct, ...others]);
+
+            const grid = document.getElementById('options-grid');
+            grid.innerHTML = '';
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.textContent = opt.name;
+                btn.className = 'option-btn';
+                btn.onclick = () => checkAnswer(btn, opt.name, correct.name);
+                grid.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(btn, selected, correct) {
+            if (answered) return;
+            answered = true;
+
+            const allBtns = document.querySelectorAll('.option-btn');
+            allBtns.forEach(b => {
+                b.disabled = true;
+                if (b.textContent === correct) b.classList.add('correct');
+            });
+
+            if (selected === correct) {
+                btn.classList.add('correct');
+                score++;
+                document.getElementById('feedback').textContent = '✓ Correct!';
+                document.getElementById('feedback').style.color = '#2d7a2d';
+            } else {
+                btn.classList.add('wrong');
+                document.getElementById('feedback').textContent = `✗ It was ${correct}`;
+                document.getElementById('feedback').style.color = '#c0392b';
+            }
+
+            setTimeout(() => {
+                currentQ++;
+                if (currentQ < 10) {
+                    loadQuestion();
+                } else {
+                    showResults();
+                }
+            }, 1200);
+        }
+
+        function showResults() {
+            document.getElementById('game-screen').style.display = 'none';
+            document.getElementById('results-screen').style.display = 'block';
+            document.getElementById('score-title').textContent = `You scored ${score}/10!`;
+            const msgs = {
+                10: "Perfect score! You're a geography genius! 🌟",
+                9:  "Almost perfect — incredible! 🎉",
+                8:  "Great job, world traveller! 🌍",
+                7:  "Solid effort! Keep exploring! ✈️",
+                6:  "Not bad! A few more trips needed! 🗺️",
+                5:  "Halfway there — keep practising! 🧭",
+            };
+            document.getElementById('score-msg').textContent = msgs[score] || "Keep travelling and learning! 🌏";
+        }
+
+        // Start game on load
+        startGame();
     </script>
 
 </body>
