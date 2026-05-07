@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résumé — Weston Jackson</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        :root {
+            --navy: #1a3a5c;
+            --gold: #c9a84c;
+            --light: #f7f5f0;
+            --mid: #e8e4dc;
+            --text: #2d3748;
+            --muted: #718096;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Jost', sans-serif;
+            background: var(--light);
+            color: var(--text);
+        }
+
+        /* ---- NAVBAR ---- */
+        .navbar {
+            background: var(--navy) !important;
+            padding: 18px 40px;
+        }
+
+        .navbar-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #fff !important;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-link {
+            color: rgba(255,255,255,0.75) !important;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-left: 8px;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover { color: var(--gold) !important; }
+
+        /* ---- HEADER ---- */
+        .resume-header {
+            background: var(--navy);
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+
+        .resume-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        .resume-header h1 em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .contact-row {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+
+        .contact-item {
+            color: rgba(255,255,255,0.65);
+            font-size: 0.9rem;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .contact-item:hover { color: var(--gold); }
+        .contact-item i { color: var(--gold); }
+
+        /* ---- MAIN CONTENT ---- */
+        .resume-body {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0 24px;
+        }
+
+        /* ---- SECTION ---- */
+        .resume-section {
+            margin-bottom: 56px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 28px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--navy);
+        }
+
+        .section-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--navy);
+            letter-spacing: 0.05em;
+        }
+
+        .section-header i {
+            color: var(--gold);
+            font-size: 1.3rem;
+        }
+
+        /* ---- ENTRY ---- */
+        .resume-entry {
+            margin-bottom: 32px;
+            padding-left: 16px;
+            border-left: 3px solid var(--mid);
+            transition: border-color 0.2s;
+        }
+
+        .resume-entry:hover {
+            border-left-color: var(--gold);
+        }
+
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: 4px;
+        }
+
+        .entry-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        .entry-date {
+            font-size: 0.85rem;
+            color: var(--muted);
+            font-weight: 400;
+            white-space: nowrap;
+        }
+
+        .entry-subtitle {
+            font-size: 0.9rem;
+            color: var(--gold);
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .entry-location {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        .entry-bullets {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        .entry-bullets li {
+            font-size: 0.92rem;
+            color: var(--text);
+            font-weight: 300;
+            line-height: 1.7;
+            padding-left: 16px;
+            position: relative;
+            margin-bottom: 6px;
+        }
+
+        .entry-bullets li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-size: 0.8rem;
+        }
+
+        /* ---- SKILLS ---- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .skill-card {
+            background: #fff;
+            border: 1px solid var(--mid);
+            border-radius: 4px;
+            padding: 16px 20px;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .skill-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .skill-card-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 6px;
+        }
+
+        .skill-card-value {
+            font-size: 0.9rem;
+            color: var(--text);
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        /* ---- EDUCATION HIGHLIGHTS ---- */
+        .edu-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .edu-badge {
+            background: var(--navy);
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: 2px;
+            letter-spacing: 0.05em;
+        }
+
+        /* ---- FOOTER ---- */
+        footer {
+            background: #0d1f33;
+            color: rgba(255,255,255,0.4);
+            text-align: center;
+            padding: 32px;
+            font-size: 0.85rem;
+            margin-top: 80px;
+        }
+
+        footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        @media print {
+            .navbar, footer { display: none; }
+            .resume-body { margin: 20px auto; }
+        }
+
+        @media (max-width: 600px) {
+            .entry-header { flex-direction: column; }
+            .contact-row { gap: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Weston Jackson</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="scratch.html">Travel Map</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="resume-header">
+        <h1>Weston <em>Jackson</em></h1>
+        <p style="color: rgba(255,255,255,0.5); font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 8px;">Pre-Business · Brigham Young University</p>
+        <div class="contact-row">
+            <a href="tel:4157187088" class="contact-item"><i class="bi bi-telephone"></i>(415) 718-7088</a>
+            <a href="mailto:westonjackson@icloud.com" class="contact-item"><i class="bi bi-envelope"></i>westonjackson@icloud.com</a>
+            <a href="https://www.linkedin.com/in/weston-jackson42/" target="_blank" class="contact-item"><i class="bi bi-linkedin"></i>linkedin.com/in/weston-jackson42</a>
+        </div>
+    </div>
+
+    <!-- Resume Body -->
+    <div class="resume-body">
+
+        <!-- Education -->
+        <div class="resume-section">
+            <div class="section-header">
+                <i class="bi bi-mortarboard-fill"></i>
+                <h2>Education</h2>
+            </div>
+            <div class="resume-entry">
+                <div class="entry-header">
+                    <span class="entry-title">Brigham Young University</span>
+                    <span class="entry-date">Expected 2028</span>
+                </div>
+                <div class="entry-subtitle">Bachelor of Science, Pre-Business · Minor in Computer Science</div>
+                <div class="entry-location"><i class="bi bi-geo-alt" style="color:var(--gold)"></i> Provo, UT</div>
+                <div class="edu-highlights">
+                    <span class="edu-badge">GPA 3.57</span>
+                    <span class="edu-badge">ACT 30 / 36 — 93rd Percentile</span>
+                    <span class="edu-badge">Delta Alpha Pi</span>
+                    <span class="edu-badge">Corporate Strategy Association</span>
+                    <span class="edu-badge">Private Equity & Venture Capital Association</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Experience -->
+        <div class="resume-section">
+            <div class="section-header">
+                <i class="bi bi-briefcase-fill"></i>
+                <h2>Experience</h2>
+            </div>
+
+            <!-- StealthMole -->
+            <div class="resume-entry">
+                <div class="entry-header">
+                    <span class="entry-title">StealthMole</span>
+                    <span class="entry-date">Apr 2026 – Ongoing</span>
+                </div>
+                <div class="entry-subtitle">Business Development & Customer Strategies Intern</div>
+                <div class="entry-location"><i class="bi bi-geo-alt" style="color:var(--gold)"></i> Singapore</div>
+                <ul class="entry-bullets">
+                    <li>Developed data-driven insights through statistical analyses from 5,000+ data points to identify customer growth opportunities and inform expansion strategy.</li>
+                    <li>Represented the company at DEF CON and government trainings, engaging with 100+ prospective users and synthesizing feedback to refine go-to-market strategy.</li>
+                    <li>Developed AI-integrated solutions to expand service accessibility and improve operational effectiveness.</li>
+                </ul>
+            </div>
+
+            <!-- Sharetown -->
+            <div class="resume-entry">
+                <div class="entry-header">
+                    <span class="entry-title">Sharetown</span>
+                    <span class="entry-date">Dec 2019 – Apr 2022</span>
+                </div>
+                <div class="entry-subtitle">Independent Contractor — Territory Manager</div>
+                <div class="entry-location"><i class="bi bi-geo-alt" style="color:var(--gold)"></i> Charlotte, NC</div>
+                <ul class="entry-bullets">
+                    <li>Generated $100K+ in sales by analyzing market demand and pricing trends to optimize revenue and drive repeat business.</li>
+                    <li>Managed end-to-end operations including marketing, pricing, and customer outreach, using data from sales performance to optimize listings and increase conversion rates.</li>
+                    <li>Recruited and led a team of 5+ employees, evaluating performance and implementing process improvements to increase productivity and service quality.</li>
+                </ul>
+            </div>
+
+            <!-- YMCA -->
+            <div class="resume-entry">
+                <div class="entry-header">
+                    <span class="entry-title">YMCA</span>
+                    <span class="entry-date">Jun 2022 – Sep 2022</span>
+                </div>
+                <div class="entry-subtitle">Lifeguard</div>
+                <div class="entry-location"><i class="bi bi-geo-alt" style="color:var(--gold)"></i> Matthews, NC</div>
+                <ul class="entry-bullets">
+                    <li>Communicated effectively with individuals from diverse backgrounds, adapting tone and approach to ensure clear understanding and maintain a positive, safe environment.</li>
+                    <li>Collaborated with a team of 20+ members to coordinate daily operations, ensuring clear communication and efficient task execution.</li>
+                    <li>Completed and upheld lifeguard, CPR, and First Aid certifications, demonstrating readiness to respond effectively in high-pressure situations.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Volunteer -->
+        <div class="resume-section">
+            <div class="section-header">
+                <i class="bi bi-heart-fill"></i>
+                <h2>Volunteer Experience</h2>
+            </div>
+            <div class="resume-entry">
+                <div class="entry-header">
+                    <span class="entry-title">The Church of Jesus Christ of Latter-day Saints</span>
+                    <span class="entry-date">Aug 2023 – Aug 2025</span>
+                </div>
+                <div class="entry-subtitle">Volunteer Representative</div>
+                <div class="entry-location"><i class="bi bi-geo-alt" style="color:var(--gold)"></i> Boston, MA</div>
+                <ul class="entry-bullets">
+                    <li>Leveraged interpersonal insights from interactions with 1,000+ individuals to adapt messaging and increase engagement across diverse cultural contexts.</li>
+                    <li>Tracked outcomes of trainings and outreach efforts to refine approaches, resulting in more effective communication and measurable impact.</li>
+                    <li>Prepared and delivered weekly trainings to motivate groups of volunteers, reviewing performance and collaborating to identify challenges and implement solutions.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Skills -->
+        <div class="resume-section">
+            <div class="section-header">
+                <i class="bi bi-star-fill"></i>
+                <h2>Skills & Interests</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-card-label">Technical</div>
+                    <div class="skill-card-value">Python, C++, C, Java, Excel VBA, SQL</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card-label">Case Competitions</div>
+                    <div class="skill-card-value">Sunoco (Team Member) · Bain (Team Lead)</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card-label">Travel</div>
+                    <div class="skill-card-value">International travel — 67 countries across 6 continents</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card-label">Certifications</div>
+                    <div class="skill-card-value">PADI Open Water Certified Diver</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card-label">Interests</div>
+                    <div class="skill-card-value">Piano · Sailing · Volleyball</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Weston Jackson · <a href="index.html">Home</a> · <a href="resume.html">Résumé</a> · <a href="scratch.html">Travel Map</a> · <a href="flag-quiz.html">Flag Quiz</a></p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
