@@ -30,35 +30,6 @@ body {
     line-height: 1.7;
 }
 
-/* --- Flag Ticker --- */
-.flag-ticker-wrap {
-    overflow: hidden;
-    background: var(--dark-blue);
-    padding: 12px 0;
-    width: 100%;
-}
-
-.flag-ticker {
-    display: flex;
-    gap: 12px;
-    width: max-content;
-    animation: ticker-scroll 40s linear infinite;
-}
-
-.ticker-flag {
-    height: 40px;
-    width: 60px;
-    object-fit: cover;
-    border-radius: 4px;
-    border: 1px solid rgba(255,255,255,0.2);
-    flex-shrink: 0;
-}
-
-@keyframes ticker-scroll {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
-
 /* --- Navigation --- */
 nav {
     background-color: var(--dark-blue);
@@ -373,6 +344,73 @@ header h1 {
 .app-button:hover {
     background: var(--light-blue);
     transform: translateY(-2px);
+}
+
+/* --- Bucket List --- */
+.bucket-section {
+    padding: 60px 10%;
+    background: var(--dark-blue);
+    color: var(--white);
+    position: relative;
+    z-index: 1;
+}
+
+.bucket-section h2 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    margin-bottom: 12px;
+    color: var(--white);
+}
+
+.bucket-intro {
+    margin-bottom: 28px;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.7);
+}
+
+.bucket-grid {
+    overflow: hidden;
+}
+
+.bucket-col {
+    float: left;
+    width: 100%;
+}
+
+.bucket-list {
+    list-style: decimal;
+    padding-left: 20px;
+}
+
+.bucket-list > li {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--light-blue);
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    border-left: 3px solid var(--light-blue);
+    transition: background 0.2s;
+}
+
+.bucket-list > li:hover {
+    background: rgba(255,255,255,0.1);
+    border-left-color: var(--white);
+    cursor: default;
+}
+
+.bucket-list > li > ul {
+    list-style: disc;
+    padding-left: 20px;
+    margin-top: 8px;
+}
+
+.bucket-list > li > ul > li {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 4px;
 }
 
 /* --- Footer --- */

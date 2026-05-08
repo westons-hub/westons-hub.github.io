@@ -136,6 +136,40 @@
         <a href="flag-quiz.html" class="app-button">Launch Flag Quiz →</a>
     </section>
 
+    <!-- Bucket List Section — demonstrates nested lists, span, br, float, z-index -->
+    <section class="bucket-section" id="bucket">
+        <h2>Travel Bucket List</h2>
+        <p class="bucket-intro">A few places still on my list — <span style="font-style: italic; color: var(--accent);">the adventure never stops.</span></p>
+
+        <!-- Ordered list of regions with nested unordered lists of destinations -->
+        <div class="bucket-grid">
+            <div class="bucket-col">
+                <ol class="bucket-list">
+                    <li><strong>South America</strong>
+                        <ul>
+                            <li>Patagonia, Argentina</li>
+                            <li>Machu Picchu, Peru</li>
+                            <li>Amazon Rainforest, Brazil</li>
+                        </ul>
+                    </li>
+                    <li><strong>Asia</strong>
+                        <ul>
+                            <li>Bhutan</li>
+                            <li>Mongolia</li>
+                            <li>Maldives <br><em>— snorkelling trip</em></li>
+                        </ul>
+                    </li>
+                    <li><strong>Africa</strong>
+                        <ul>
+                            <li>Madagascar</li>
+                            <li>Ethiopia</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <a href="#top">↑ Back to Top</a>
@@ -259,25 +293,6 @@
                 }).addTo(usMap);
             });
 
-        // ===== FLAG TICKER =====
-        const tickerCodes = [
-            "at","au","be","bz","bw","kh","ca","cw","cn","ck","cr","hr","cy","cz","dk",
-            "do","eg","gb","fr","de","gr","gt","hk","hu","is","in","ie","il","it","jp",
-            "ke","my","mv","mt","mu","mx","ma","na","nl","nc","nz","no","ps","ph","pl",
-            "pt","sc","sg","si","sb","za","es","lk","ch","tw","tz","th","tr","ae","us",
-            "vu","va","vn","zm","zw","id"
-        ];
-
-        const ticker = document.getElementById('flag-ticker');
-        // Double the flags for seamless loop
-        const allCodes = [...tickerCodes, ...tickerCodes];
-        allCodes.forEach(code => {
-            const img = document.createElement('img');
-            img.src = `https://flagcdn.com/w80/${code}.png`;
-            img.alt = code;
-            img.className = 'ticker-flag';
-            ticker.appendChild(img);
-        });
     </script>
 
 </body>
