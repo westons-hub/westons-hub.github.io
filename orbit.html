@@ -1,0 +1,165 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Orbit · Weston Jackson</title>
+<link rel="icon" href="orbit/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="orbit/brand.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:var(--orbit-bg);color:var(--orbit-slate);font:17px/1.6 var(--orbit-font)}
+a{color:var(--orbit-navy)}
+a:focus-visible{outline:3px solid var(--orbit-orange);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+nav{display:flex;align-items:center;gap:24px;padding:20px 0;font-size:15px}
+nav a{text-decoration:none}
+nav .home{margin-right:auto;font-weight:700}
+h1,h2,h3{color:var(--orbit-navy);font-weight:700;margin:0}
+.btn{display:inline-block;padding:12px 22px;border-radius:999px;font-weight:700;text-decoration:none;border:2px solid var(--orbit-navy)}
+.btn.go{background:var(--orbit-gradient);border-color:transparent;color:#fff}
+
+.hero{display:grid;grid-template-columns:1fr 1.15fr;gap:32px;align-items:center;min-height:calc(100svh - 70px);padding-bottom:32px}
+.hero img{height:44px;margin-bottom:28px}
+.hero h1{font-size:clamp(40px,5.2vw,68px);line-height:1.02;letter-spacing:-.02em;max-width:11ch}
+.hero p{font-size:19px;max-width:38ch;margin:20px 0 32px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+#orbit{width:100%;height:auto;display:block;cursor:crosshair}
+#orbit .ring{fill:none;stroke:#D5DBE3;stroke-width:1.5;stroke-dasharray:2 7;stroke-linecap:round}
+#orbit .tie{stroke:#F9731666;stroke-width:1.5}
+#orbit .chain{fill:none;stroke:var(--orbit-rose);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:6 8;animation:march 1s linear infinite,pulse 5s ease-in-out infinite}
+@keyframes march{to{stroke-dashoffset:-14}}
+@keyframes pulse{0%,15%{opacity:0}30%,80%{opacity:1}100%{opacity:0}}
+#orbit text{font:700 13px var(--orbit-font);fill:var(--orbit-navy)}
+#orbit .co text{fill:#fff;font-size:12px}
+.hint{margin:8px 0 0;font-size:14px;text-align:center}
+
+section{padding:88px 0;border-top:1px solid #DDE2E8}
+h2{font-size:clamp(30px,3.4vw,42px);margin-bottom:12px}
+.lead{max-width:56ch;margin:0 0 36px}
+.video{aspect-ratio:16/9;border-radius:20px;background:var(--orbit-bg-dark);display:grid;place-items:center;color:var(--orbit-slate-dark);text-align:center}
+.play{width:72px;height:72px;margin:0 auto 14px;border-radius:50%;background:var(--orbit-gradient);display:grid;place-items:center}
+.play::after{content:"";border-left:20px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px}
+.feats{display:grid;grid-template-columns:1fr 1fr;gap:40px 72px;list-style:none;margin:0;padding:0}
+.feats h3{font-size:20px;margin-bottom:4px}
+.feats li{border-left:3px solid var(--orbit-orange);padding-left:18px}
+.feats li:nth-child(even){border-color:var(--orbit-rose)}
+.viewer{max-width:960px;margin:0 auto}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:20px}
+.tabs button{font:600 15px var(--orbit-font);color:var(--orbit-navy);background:#fff;border:1.5px solid #D5DBE3;border-radius:999px;padding:8px 18px;cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--orbit-navy);border-color:var(--orbit-navy);color:#fff}
+.tabs button:focus-visible{outline:3px solid var(--orbit-orange);outline-offset:2px}
+.panel{background:linear-gradient(160deg,#E7EBF1,#F1E9E4);border-radius:24px;padding:32px;height:min(600px,70vh);display:flex;align-items:center;justify-content:center}
+.panel img{max-width:100%;max-height:100%;width:auto;height:auto;border-radius:12px;box-shadow:0 12px 32px -12px #1E3A5F59;background:#fff}
+.panel img[hidden]{display:none}
+.cap{text-align:center;font-size:15px;margin:14px 0 0}
+footer .wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+footer .links{margin-left:auto;display:flex;gap:16px;align-items:center}
+.icon{display:block;line-height:0}
+.nav-icons{display:flex;gap:14px;align-items:center}
+.icon img{border-radius:4px}
+.try{text-align:center}
+.try p{max-width:44ch;margin:12px auto 28px}
+footer{border-top:1px solid #DDE2E8;padding:28px 0;font-size:14px}
+@media(max-width:820px){.hero{grid-template-columns:1fr;min-height:0;padding-top:24px}.feats{grid-template-columns:1fr}.panel{padding:12px;height:auto;border-radius:16px}.panel img{max-height:70vh}nav .opt{display:none}nav{gap:10px}.nav-icons{gap:10px}nav .home{white-space:nowrap}nav .btn{padding:8px 14px;white-space:nowrap}}
+@media(prefers-reduced-motion:reduce){.chain{animation:none!important}}
+</style></head><body>
+<div class="wrap"><nav><a class="home" href="index.html">Weston Jackson</a><a class="opt" href="#walkthrough">Walkthrough</a><a class="opt" href="#features">What it does</a><a class="btn go" href="https://westons-hub.github.io/network-map/">Try Orbit</a></nav></div>
+
+<div class="wrap hero">
+<div>
+<img src="orbit/orbit-logo.svg" alt="Orbit">
+<h1>Turn the people you know into a map.</h1>
+<p>Orbit is a free website for job and internship networking. It shows who you know, where they work, and who could introduce you to the companies you want.</p>
+<div class="btns"><a class="btn go" href="https://westons-hub.github.io/network-map/">Try Orbit, it's free</a><a class="btn" href="#walkthrough">Watch the walkthrough</a></div>
+</div>
+<div>
+<svg id="orbit" viewBox="-300 -300 600 600" role="img" aria-label="An animated map: you in the center, people you know circling around you, and a highlighted chain of introductions to a company."></svg>
+<p class="hint">Click the map to add someone to your orbit.</p>
+</div>
+</div>
+
+<section id="walkthrough"><div class="wrap">
+<h2>See it in two minutes</h2>
+<p class="lead">A quick tour, from bringing in your LinkedIn connections to finding your way into a target company.</p>
+<!-- Swap this box for the video when it's ready, e.g. <video src="orbit/walkthrough.mp4" controls></video> or a YouTube embed -->
+<div class="video"><div><div class="play"></div>Walkthrough video coming soon</div></div>
+</div></section>
+
+<section id="features"><div class="wrap">
+<h2>What it does</h2>
+<p class="lead">You're in the center. Everyone you know branches out around you.</p>
+<ul class="feats">
+<li><h3>See everyone at a glance</h3><p>When several people work at the same company or went to the same school, that place gets its own dot, so clusters jump out.</p></li>
+<li><h3>Find a way in</h3><p>Add the companies you want to work at. Orbit shows who you know there, or the best chain of people who could introduce you.</p></li>
+<li><h3>Fill it in fast</h3><p>Bring in the connections file LinkedIn lets you download, use an Excel spreadsheet, or add people one at a time.</p></li>
+<li><h3>Keep track of your outreach</h3><p>Mark where you are with each person, from To Reach Out to Contacted, Met and Follow Up. Schedule meetings, see them on a calendar, and get reminders like "send a thank-you."</p></li>
+<li><h3>Private by design</h3><p>Everything stays on your own computer. Nothing is uploaded, and you don't need an account.</p></li>
+</ul>
+</div></section>
+
+<section id="screens"><div class="wrap">
+<h2>Screenshots</h2>
+<p class="lead">The map, the people in it, and the tools for keeping up with them.</p>
+<div class="viewer">
+<div class="tabs" role="group" aria-label="Choose a screenshot"><button type="button" aria-pressed="true" data-i="0">Map</button><button type="button" aria-pressed="false" data-i="1">Profile</button><button type="button" aria-pressed="false" data-i="2">Outreach</button><button type="button" aria-pressed="false" data-i="3">To-do</button><button type="button" aria-pressed="false" data-i="4">Dark mode</button></div>
+<div class="panel"><img src="orbit/shots/map.webp" alt="Orbit map: you in the center, with people grouped around Microsoft, Deloitte and Stanford University, and Google marked as a target with no one yet" data-cap="People cluster around the companies and schools they share."><img src="orbit/shots/profile.png" alt="Profile card for a contact, showing status, shared school, next task and latest meeting notes" data-cap="Each person's card: how you're connected, notes and the next step." hidden><img src="orbit/shots/tracker.webp" alt="Outreach table listing each contact's company, role, status, last contact, next meeting and follow-up date" data-cap="Track where you are with everyone." hidden><img src="orbit/shots/todo.png" alt="To-do list grouped into overdue, today, this week and later, with tasks like sending thank-you notes" data-cap="Reminders, sorted by when they're due." hidden><img src="orbit/shots/map-dark.png" alt="Close-up of the map in dark mode, showing the people connected to Deloitte" data-cap="Dark mode, zoomed in on one company." hidden></div>
+<p class="cap" aria-live="polite">People cluster around the companies and schools they share.</p>
+</div>
+<script>
+(()=>{const v=document.querySelector('.viewer'),bs=v.querySelectorAll('button'),is=v.querySelectorAll('.panel img'),cap=v.querySelector('.cap');
+bs.forEach(b=>b.addEventListener('click',()=>{const i=+b.dataset.i;bs.forEach(x=>x.setAttribute('aria-pressed',x===b));is.forEach((im,j)=>im.hidden=j!==i);cap.textContent=is[i].dataset.cap}));})();
+</script>
+</div></section>
+
+<section class="try"><div class="wrap">
+<h2>Start your orbit</h2>
+<p>It's free, it runs in your browser, and there's nothing to sign up for.</p>
+<a class="btn go" href="https://westons-hub.github.io/network-map/">Try Orbit</a>
+</div></section>
+
+<footer><div class="wrap"><span>Orbit is a project by <a href="index.html">Weston Jackson</a>.</span><span class="links"><a class="icon" href="https://www.linkedin.com/in/weston-jackson42/" aria-label="LinkedIn"><img src="icons/linkedin.webp" alt="" width="26" height="26"></a><a class="icon" href="https://github.com/westons-hub" aria-label="GitHub"><img src="icons/github.svg" alt="" width="28" height="28"></a><a class="icon" href="https://www.youtube.com/channel/UCnmhHrcaIe1yvk1Fe79Xd9g" aria-label="YouTube"><img src="icons/youtube.png" alt="" width="31" height="22"></a><a class="icon" href="mailto:westonsdesk@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" aria-hidden="true" width="26" height="26" fill="none" stroke="#14295B" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg></a></span></div></footer>
+
+<script>
+(()=>{
+const svg=document.getElementById('orbit'),NS='http://www.w3.org/2000/svg';
+const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const el=(t,a,p=svg)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e};
+const rings=[{r:110,s:.00016},{r:180,s:-.0001},{r:252,s:.00006}];
+rings.forEach(g=>el('circle',{class:'ring',r:g.r}));
+const ties=el('g',{}),chain=el('polyline',{class:'chain'}),dots=el('g',{});
+const people=[],colors=['#F97316','#F43F5E','#5B6B80'];
+function add(name,ring,a,co,from){
+  const g=el('g',co?{class:'co'}:{},dots);
+  el('circle',{r:co?24:10,fill:co?'#F97316':colors[people.length%3]},g);
+  el('text',co?{'text-anchor':'middle',dy:4}:{dx:14,dy:4},g).textContent=name;
+  const p={g,ring,a,co,r:from?Math.hypot(from.x,from.y):rings[ring].r};people.push(p);return p;
+}
+// a starter orbit: friends, classmates, and two places they share
+const maya=add('Maya',0,0.4),leo=add('Leo',1,1.9);
+add('Sam',0,2.5);add('Priya',0,4.4);add('Jordan',1,3.8);add('Ana',1,5.6);add('Chris',2,1.0);add('Dev',2,4.9);
+const acme=add('Acme',2,2.6,true),school=add('State U',1,0.2,true);
+const tieTo=[[leo,acme],[add('Kai',2,3.3),acme],[maya,school],[add('Noor',0,5.9),school]];
+const tieEls=tieTo.map(()=>el('line',{class:'tie'},ties));
+el('circle',{r:34,fill:'#1E3A5F'});
+el('text',{'text-anchor':'middle',dy:5,style:'fill:#fff;font-size:15px'}).textContent='You';
+let last=performance.now();
+function frame(now){
+  const dt=still?0:Math.min(now-last,50);last=now;
+  for(const p of people){
+    p.a+=rings[p.ring].s*dt*(p.co?.8:1);
+    p.r+=(rings[p.ring].r-p.r)*(still?1:Math.min(1,dt*.006));
+    p.q={x:Math.cos(p.a)*p.r,y:Math.sin(p.a)*p.r};
+    p.g.setAttribute('transform',`translate(${p.q.x.toFixed(1)} ${p.q.y.toFixed(1)})`);
+  }
+  tieTo.forEach(([a,b],i)=>{const t=tieEls[i];t.setAttribute('x1',a.q.x);t.setAttribute('y1',a.q.y);t.setAttribute('x2',b.q.x);t.setAttribute('y2',b.q.y)});
+  chain.setAttribute('points',`0,0 ${maya.q.x},${maya.q.y} ${leo.q.x},${leo.q.y} ${acme.q.x},${acme.q.y}`);
+  if(!still)requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+const names=['Alex','Rosa','Theo','Lena','Omar','Ivy','Ben','Zoe','Ravi','Mia','Eli','June'];let n=0;
+svg.addEventListener('click',e=>{
+  if(people.length>40)return;
+  const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;const p=pt.matrixTransform(svg.getScreenCTM().inverse());
+  const d=Math.hypot(p.x,p.y);let ring=0;rings.forEach((g,i)=>{if(Math.abs(g.r-d)<Math.abs(rings[ring].r-d))ring=i});
+  add(names[n++%names.length],ring,Math.atan2(p.y,p.x),false,p);
+  if(still)frame(performance.now());
+});
+})();
+</script>
+</body></html>
