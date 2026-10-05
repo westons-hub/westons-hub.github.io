@@ -1,5 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Query · Weston Jackson</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a6b4d'/%3E%3Ccircle cx='15' cy='15' r='7' fill='none' stroke='%23fff' stroke-width='3'/%3E%3Cpath d='M19.5 19.5 25 25' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="query-brand/favicon-light.svg" type="image/svg+xml">
 <style>
 :root{--bg:#f6f5f1;--surface:#fff;--sunken:#efede7;--ink:#1c1b19;--muted:#5a5852;--line:#d9d6cd;--accent:#0a6b4d;--soft:#e1f0e9;--mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
 *{box-sizing:border-box}
@@ -23,7 +23,7 @@ h1,h2,h3{color:var(--ink);margin:0}
 .top nav a{color:#fff}
 .top nav .btn.go{background:#fff;border-color:#fff;color:var(--accent)}
 .hero{display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:center;min-height:calc(100svh - 76px);padding-bottom:48px}
-.word{font-size:22px;font-weight:700;color:#fff;margin:0 0 20px}
+.word{display:block;height:56px;width:auto;margin:0 0 22px -6px}
 .hero h1{font-size:clamp(38px,4.8vw,62px);line-height:1.04;letter-spacing:-.02em;color:#fff;max-width:13ch}
 .hero p.lede{font-size:19px;max-width:40ch;margin:18px 0 30px}
 .btns{display:flex;gap:12px;flex-wrap:wrap}
@@ -81,7 +81,7 @@ footer .links{margin-left:auto;display:flex;gap:16px;align-items:center}
 
 <div class="wrap hero">
 <div>
-<p class="word">Query</p>
+<img class="word" src="query-brand/lockup-query-dark.svg" alt="Query" width="194" height="56">
 <h1>Answers from your spreadsheets, in your browser.</h1>
 <p class="lede">Drop in CSV or Excel files, clean them up, and ask questions with or without SQL. Nothing is uploaded.</p>
 <div class="btns"><a class="btn go" href="https://westons-hub.github.io/query/">Try Query</a><a class="btn" href="#walkthrough">Watch the walkthrough</a></div>
