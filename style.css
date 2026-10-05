@@ -81,7 +81,7 @@ article.slide:first-of-type{align-content:end}
 .hero-text{max-width:none;padding:8px 0 56px}}
 
 /* Query: green background and a small mock of question -> SQL -> answer */
-.stage[data-p="1"]{background:#0a6b4d}
+.stage[data-p="1"]{background-color:#0a6b4d;background-image:linear-gradient(#ffffff26 1px,transparent 1px),linear-gradient(90deg,#ffffff26 1px,transparent 1px);background-size:100% 28px,104px 100%}
 .qmock{display:block;justify-self:center;width:100%;max-width:540px;background:#fff;border-radius:10px;padding:24px;box-shadow:0 24px 50px -24px #00000080;color:#1c1b19;text-decoration:none;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
 .qmock .file{display:inline-block;font:12.5px ui-monospace,"SF Mono",Menlo,monospace;background:#e1f0e9;color:#0a6b4d;padding:3px 9px;border-radius:4px}
 .qmock .q{font-size:20px;font-weight:600;margin:14px 0 10px;color:#1c1b19}
