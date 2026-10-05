@@ -16,6 +16,10 @@ h1,h2,h3{color:var(--ink);margin:0}
 
 /* green spreadsheet band behind the top of the page */
 .top{background:var(--accent) linear-gradient(#ffffff26 1px,transparent 1px) 0 0/100% 28px,linear-gradient(90deg,#ffffff26 1px,transparent 1px) 0 0/104px 100%;background-color:var(--accent);background-image:linear-gradient(#ffffff26 1px,transparent 1px),linear-gradient(90deg,#ffffff26 1px,transparent 1px);background-size:100% 28px,104px 100%;color:#e7f3ee}
+.top{position:relative;overflow:hidden}
+.top>.wrap{position:relative;z-index:1}
+.cells{position:absolute;inset:0;pointer-events:none}
+.cells span{position:absolute;height:29px;width:105px;padding:0 7px;font:12.5px/28px var(--mono);color:#ffffffd9;white-space:nowrap;overflow:hidden;border:2px solid #fff;margin:-1px 0 0 -1px;transition:opacity .3s}
 .top nav a{color:#fff}
 .top nav .btn.go{background:#fff;border-color:#fff;color:var(--accent)}
 .hero{display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:center;min-height:calc(100svh - 76px);padding-bottom:48px}
@@ -72,6 +76,7 @@ footer .links{margin-left:auto;display:flex;gap:16px;align-items:center}
 @media(prefers-reduced-motion:reduce){.mock .bar span{transition:none}}
 </style></head><body>
 <div class="top">
+<div class="cells" aria-hidden="true"></div>
 <div class="wrap"><nav><a class="home" href="index.html">Weston Jackson</a><a class="opt" href="#walkthrough">Walkthrough</a><a class="opt" href="#how">How it works</a><a class="btn go" href="https://westons-hub.github.io/query/">Try Query</a></nav></div>
 
 <div class="wrap hero">
@@ -158,6 +163,40 @@ bs.forEach(b=>b.addEventListener('click',()=>show(+b.dataset.i)));
 show(0);
 const v=document.querySelector('.viewer'),tb=v.querySelectorAll('button'),is=v.querySelectorAll('.panel img'),cap=v.querySelector('.cap');
 tb.forEach(b=>b.addEventListener('click',()=>{const i=+b.dataset.i;tb.forEach(x=>x.setAttribute('aria-pressed',x===b));is.forEach((im,j)=>im.hidden=j!==i);cap.textContent=is[i].dataset.cap}));
+})();
+
+// spreadsheet entries type themselves into empty green cells, then delete
+(()=>{
+if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+const top=document.querySelector('.top'),layer=top.querySelector('.cells'),CW=104,CH=28;
+const words=['=SUM(B2:B9)','Revenue','$48,200','North','=AVG(C:C)','Q3 total','1,840','2025-01-04','Backpack','=COUNT(A:A)','region','units','€1,524','West','#REF!','hiking','orders','=B2*C2','Paid','15%'];
+const busy=new Set();
+function freeCell(){
+  const r=top.getBoundingClientRect(),cols=Math.floor(r.width/CW),rows=Math.floor(r.height/CH);
+  const blocks=[...top.querySelectorAll('nav a,.word,h1,.lede,.btns,.mock,.hint')].map(e=>e.getBoundingClientRect());
+  for(let t=0;t<30;t++){
+    const c=Math.floor(Math.random()*cols),w=Math.floor(Math.random()*rows),key=c+','+w;
+    const x=r.left+c*CW,y=r.top+w*CH;
+    if(busy.has(key)||y+CH<0||y>innerHeight)continue;
+    if(blocks.some(b=>x<b.right+8&&x+CW>b.left-8&&y<b.bottom+6&&y+CH>b.top-6))continue;
+    return{c,w,key};
+  }
+}
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+async function typer(){
+  for(;;){
+    await wait(400+Math.random()*1600);
+    const cell=freeCell();if(!cell)continue;
+    busy.add(cell.key);
+    const s=document.createElement('span');s.style.left=cell.c*CW+'px';s.style.top=cell.w*CH+'px';layer.appendChild(s);
+    const word=words[Math.floor(Math.random()*words.length)];
+    for(let i=1;i<=word.length;i++){s.textContent=word.slice(0,i);await wait(60+Math.random()*60)}
+    await wait(1400);
+    for(let i=word.length-1;i>=0;i--){s.textContent=word.slice(0,i);await wait(35)}
+    s.style.opacity=0;await wait(300);s.remove();busy.delete(cell.key);
+  }
+}
+typer();setTimeout(typer,700);setTimeout(typer,1500);
 })();
 </script>
 </body></html>
