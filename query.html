@@ -53,6 +53,14 @@ h2{font-size:clamp(28px,3.2vw,40px);letter-spacing:-.01em;margin-bottom:12px}
 .steps h3{font-size:20px;margin-bottom:6px}
 .steps p{margin:0}
 .private{margin:28px 0 0;background:var(--soft);color:var(--ink);border-radius:10px;padding:18px 22px}
+.viewer{max-width:960px;margin:0 auto}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:20px}
+.tabs button{font-family:inherit;font-size:15px;font-weight:600;color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:999px;padding:8px 18px;cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.panel{background:var(--soft);border-radius:16px;padding:32px;height:min(600px,70vh);display:flex;align-items:center;justify-content:center}
+.panel img{max-width:100%;max-height:100%;width:auto;height:auto;border-radius:10px;box-shadow:0 12px 32px -12px #0a6b4d66}
+.panel img[hidden]{display:none}
+.cap{text-align:center;font-size:15px;margin:14px 0 0}
 .try{text-align:center}
 .try p{max-width:44ch;margin:12px auto 28px}
 footer{border-top:1px solid var(--line);padding:28px 0;font-size:14px}
@@ -60,7 +68,7 @@ footer .wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 footer .links{margin-left:auto;display:flex;gap:16px;align-items:center}
 .icon{display:block;line-height:0}
 .icon img{border-radius:4px}
-@media(max-width:820px){.hero{grid-template-columns:1fr;min-height:0;padding-top:16px}.steps{grid-template-columns:1fr}nav .opt{display:none}nav{gap:10px}nav .home{white-space:nowrap}}
+@media(max-width:820px){.hero{grid-template-columns:1fr;min-height:0;padding-top:16px}.steps{grid-template-columns:1fr}nav .opt{display:none}.panel{padding:12px;height:auto}.panel img{max-height:70vh}nav{gap:10px}nav .home{white-space:nowrap}}
 @media(prefers-reduced-motion:reduce){.mock .bar span{transition:none}}
 </style></head><body>
 <div class="top">
@@ -108,6 +116,16 @@ footer .links{margin-left:auto;display:flex;gap:16px;align-items:center}
 <p class="private"><strong>Private by design.</strong> Query runs entirely in your browser with DuckDB. There is no server, no tracking, and your files never leave your computer.</p>
 </div></section>
 
+<section id="screens"><div class="wrap">
+<h2>Screenshots</h2>
+<p class="lead">From a messy file to an answer.</p>
+<div class="viewer">
+<div class="tabs" role="group" aria-label="Choose a screenshot"><button type="button" aria-pressed="true" data-i="0">Ask a question</button><button type="button" aria-pressed="false" data-i="1">Messy data</button><button type="button" aria-pressed="false" data-i="2">Clean-up checks</button></div>
+<div class="panel"><img src="query-shots/ask.png" alt="Query question builder: pick a table, a calculation and a grouping from menus, and see the SQL and the answer below" data-cap="Build a question from menus. Query writes the SQL and shows the answer."><img src="query-shots/messy-table.png" alt="A messy sales table in dark mode, with inconsistent capitalization and a blank value" data-cap="Real spreadsheets are messy: mixed capitalization, blanks, odd formats." hidden><img src="query-shots/checks.png" alt="A panel listing 7 things to check in the data, such as a totals row and blank rows, each with a one-click fix" data-cap="Query spots problems like totals rows and blank rows, and fixes them in one click." hidden></div>
+<p class="cap" aria-live="polite">Build a question from menus. Query writes the SQL and shows the answer.</p>
+</div>
+</div></section>
+
 <section class="try"><div class="wrap">
 <h2>Try it with the sample data</h2>
 <p>It's free, there's nothing to install, and it comes with sample data so you can start right away.</p>
@@ -138,6 +156,8 @@ function show(i){
 }
 bs.forEach(b=>b.addEventListener('click',()=>show(+b.dataset.i)));
 show(0);
+const v=document.querySelector('.viewer'),tb=v.querySelectorAll('button'),is=v.querySelectorAll('.panel img'),cap=v.querySelector('.cap');
+tb.forEach(b=>b.addEventListener('click',()=>{const i=+b.dataset.i;tb.forEach(x=>x.setAttribute('aria-pressed',x===b));is.forEach((im,j)=>im.hidden=j!==i);cap.textContent=is[i].dataset.cap}));
 })();
 </script>
 </body></html>
