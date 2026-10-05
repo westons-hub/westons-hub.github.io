@@ -79,3 +79,26 @@ article.slide:first-of-type{align-content:end}
 .hero{flex-direction:column;align-items:stretch;min-height:0}
 .hero .photo{position:static;order:-1;width:100%;height:auto;aspect-ratio:4/3;-webkit-mask-image:linear-gradient(180deg,#000 75%,transparent);mask-image:linear-gradient(180deg,#000 75%,transparent)}
 .hero-text{max-width:none;padding:8px 0 56px}}
+
+/* Query: green background and a small mock of question -> SQL -> answer */
+.stage[data-p="1"]{background:#0a6b4d}
+.qmock{display:block;justify-self:center;width:100%;max-width:540px;background:#fff;border-radius:10px;padding:24px;box-shadow:0 24px 50px -24px #00000080;color:#1c1b19;text-decoration:none;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.qmock .file{display:inline-block;font:12.5px ui-monospace,"SF Mono",Menlo,monospace;background:#e1f0e9;color:#0a6b4d;padding:3px 9px;border-radius:4px}
+.qmock .q{font-size:20px;font-weight:600;margin:14px 0 10px;color:#1c1b19}
+.qmock pre{margin:0 0 12px;background:#efede7;padding:10px 12px;border-radius:6px;font:12.5px/1.6 ui-monospace,"SF Mono",Menlo,monospace;white-space:pre-wrap}
+.qmock pre b{color:#7a2e9e;font-weight:400}
+.qmock table{width:100%;border-collapse:collapse;font-size:15px}
+.qmock td{padding:8px 0;border-top:1px solid #d9d6cd}
+.qmock .bar{width:50%;padding:8px 14px}
+.qmock .bar span{display:block;height:8px;border-radius:4px;background:#0a6b4d;width:var(--w)}
+.qmock .num{text-align:right;font-variant-numeric:tabular-nums}
+.qmock>*{opacity:0}
+.slide.on .qmock>*{animation:qin .5s ease-out forwards}
+.slide.on .qmock>:nth-child(2){animation-delay:.25s}
+.slide.on .qmock>:nth-child(3){animation-delay:.6s}
+.slide.on .qmock>:nth-child(4){animation-delay:1s}
+.slide.on .qmock .bar span{animation:qgrow .7s 1.1s ease-out backwards}
+@keyframes qin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes qgrow{from{width:0}}
+@media(max-width:860px){.qmock{order:-1;padding:16px}.qmock .q{font-size:17px}}
+@media(prefers-reduced-motion:reduce){.qmock>*{opacity:1;animation:none!important}.qmock .bar span{animation:none!important}}

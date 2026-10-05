@@ -1,8 +1,8 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Weston Jackson</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=16">
+<link rel="stylesheet" href="style.css?v=21">
 </head><body>
-<div class="wrap"><nav><a class="logo" href="index.html">Weston Jackson</a><a class="opt" href="about.html">About</a><a class="opt" href="orbit.html">Orbit</a><a class="opt" href="#projects">Projects</a><a class="btn" href="Weston_Jackson_Resume.pdf">Resume</a></nav></div>
+<div class="wrap"><nav><a class="logo" href="index.html">Weston Jackson</a><a class="opt" href="about.html">About</a><a class="opt" href="orbit.html">Orbit</a><a class="opt" href="https://westons-hub.github.io/query/">Query</a><a class="opt" href="#projects">Projects</a><a class="btn" href="Weston_Jackson_Resume.pdf">Resume</a></nav></div>
 
 <section class="hero">
 <div class="wrap hero-in"><div class="hero-text">
@@ -26,8 +26,23 @@
 <article class="slide on">
 <div class="note"><h3><img src="orbit/orbit-logo.svg" alt="Orbit" height="34"></h3><p>A free website that turns the people you know into a map, and shows the best chain of introductions into the companies you want to work at.</p><small>Built with JavaScript · 2026</small><a class="btn fill" href="orbit.html">See the project</a></div>
 </article>
+<article class="slide">
+<div class="note"><h3>Query</h3><p>Drop in a spreadsheet and get answers, with or without SQL. It runs entirely in your browser, so your files are never uploaded.</p><small>Built with JavaScript and DuckDB · 2026</small><a class="btn fill" href="https://westons-hub.github.io/query/">Try Query</a></div>
+<a class="qmock" href="https://westons-hub.github.io/query/" aria-label="Open Query">
+<span class="file">sales.csv</span>
+<p class="q">Total revenue by region, highest first</p>
+<pre><b>SELECT</b> region, <b>SUM</b>(revenue) <b>AS</b> total
+<b>FROM</b> sales <b>GROUP BY</b> region <b>ORDER BY</b> total <b>DESC</b></pre>
+<table>
+<tr><td>West</td><td class="bar"><span style="--w:100%"></span></td><td class="num">$48,200</td></tr>
+<tr><td>South</td><td class="bar"><span style="--w:82%"></span></td><td class="num">$39,750</td></tr>
+<tr><td>East</td><td class="bar"><span style="--w:65%"></span></td><td class="num">$31,400</td></tr>
+<tr><td>North</td><td class="bar"><span style="--w:47%"></span></td><td class="num">$22,900</td></tr>
+</table>
+</a>
+</article>
 </div>
-<div class="steps"><div class="step" data-p="0"></div></div>
+<div class="steps"><div class="step" data-p="0"></div><div class="step" data-p="1"></div></div>
 </section>
 
 <footer><div class="wrap"><p><a class="totop" href="#" onclick="window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});return false">Weston Jackson</a></p><div class="links"><a class="icon" href="https://www.linkedin.com/in/weston-jackson42/" aria-label="LinkedIn"><img src="icons/linkedin.webp" alt="" width="26" height="26"></a><a class="icon" href="https://github.com/westons-hub" aria-label="GitHub"><img src="icons/github.svg" alt="" width="28" height="28"></a><a class="icon" href="https://www.youtube.com/channel/UCnmhHrcaIe1yvk1Fe79Xd9g" aria-label="YouTube"><img src="icons/youtube.png" alt="" width="31" height="22"></a><a class="icon" href="mailto:westonsdesk@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" aria-hidden="true" width="26" height="26" fill="none" stroke="#14295B" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg></a><a href="Weston_Jackson_Resume.pdf">Resume</a></div></div></footer>
