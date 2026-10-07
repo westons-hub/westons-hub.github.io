@@ -1,45 +1,139 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>About · Weston Jackson</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=23">
+<link rel="stylesheet" href="style.css?v=34">
 <style>
-.intro{padding:64px 0 40px}
-.intro h1{font-size:clamp(44px,6vw,72px);line-height:1.05;margin-bottom:14px}
-.intro p{margin:0;font-size:19px;max-width:44ch}
-.story{list-style:none;margin:0;padding:0 0 88px;display:grid;grid-template-columns:repeat(2,1fr);gap:48px 40px}
-.story img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block;border-radius:6px;margin-bottom:16px}
-.story .place{font-size:14px;font-weight:600;color:#5B8DEF;margin:0 0 4px}
-.story h2{font-size:26px;margin:0 0 6px}
-.story p{margin:0;max-width:48ch}
-@media(max-width:700px){.story{grid-template-columns:1fr;gap:40px}}
+.about{display:grid;grid-template-columns:1fr 1.15fr;gap:56px;align-items:center;padding:40px 0;border-bottom:1px solid var(--line)}
+.about-text{min-height:300px;display:flex;flex-direction:column;justify-content:center;transition:opacity .2s}
+.about h1{font-size:clamp(52px,7.5vw,100px);line-height:1;letter-spacing:-.02em;margin-bottom:18px}
+.about .lead{font-size:clamp(20px,2.2vw,26px);line-height:1.35;color:#6B7480;margin:0 0 18px;max-width:22ch}
+.about .body{margin:0;max-width:44ch}
+.about .big{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:6px;transition:opacity .2s}
+.about.swap .about-text,.about.swap .big{opacity:0}
+.thumbs{list-style:none;margin:0;padding:28px 0 72px;display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.thumbs button{display:block;width:100%;padding:5px;background:#fff;border:1px solid var(--line);border-radius:4px;box-shadow:0 2px 6px #0000000f;cursor:pointer}
+.thumbs img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.thumbs button[aria-pressed="true"]{outline:2.5px solid var(--ink);outline-offset:2px}
+.thumbs button:focus-visible{outline:2.5px solid var(--accent);outline-offset:2px}
+
+.game{border-top:1px solid var(--line);padding:56px 16px 88px;display:grid;grid-template-columns:1fr auto;gap:56px;align-items:start}
+.game h2{font-size:32px;margin-bottom:10px}
+.game p{margin:0 0 14px;max-width:44ch}
+.times{display:flex;gap:28px;margin:22px 0}
+.times div{font-size:14px}
+.times b{display:block;font:700 34px/1.1 "Playfair Display",Georgia,serif;color:var(--ink);font-variant-numeric:tabular-nums}
+.gbtns{display:flex;gap:10px;flex-wrap:wrap}
+.gbtns button{font:600 15px "Public Sans",sans-serif;color:var(--ink);background:#fff;border:1.5px solid var(--ink);padding:9px 16px;cursor:pointer}
+.gbtns button[aria-pressed="true"]{background:var(--ink);color:#fff}
+#msg{font-weight:600;color:var(--ink);min-height:1.6em;margin-top:16px}
+.board{display:grid;grid-template-columns:repeat(9,34px);gap:2px;background:var(--line);padding:2px;border:1.5px solid var(--ink);user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.board button{width:34px;height:34px;padding:0;border:0;background:#C9D3E3;font:700 16px "Public Sans",sans-serif;color:var(--ink);cursor:pointer}
+.board button:hover{background:#B8C5DA}
+.board button.open{background:#fff;cursor:default}
+.board button.mine{background:var(--accent);color:#fff}
+.board .n1{color:#1D4ED8}.board .n2{color:#15803D}.board .n3{color:#B8322A}.board .n4{color:#5B21B6}.board .n5{color:#92400E}.board .n6{color:#0E7490}.board .n7{color:#1c1b19}.board .n8{color:#6B7480}
+@media(max-width:760px){.about{grid-template-columns:1fr;gap:24px;padding:16px 0 28px}.about .big{order:-1}.about-text{min-height:230px;justify-content:flex-start}.thumbs{gap:8px;padding:20px 0 48px}.thumbs button{padding:3px}.game{grid-template-columns:1fr;gap:28px;padding:40px 16px 64px}.board{justify-self:center}}
+@media(prefers-reduced-motion:reduce){.about-text,.about .big{transition:none}}
 </style></head><body>
 <div class="wrap"><nav><a class="logo" href="index.html">Weston Jackson</a><a class="opt" href="about.html" aria-current="page">About</a><a class="opt" href="orbit.html">Orbit</a><a class="opt" href="query.html">Query</a><a class="btn" href="Weston_Jackson_Resume.pdf">Resume</a></nav></div>
 
-<div class="wrap intro">
-<h1>About me</h1>
-<p>I've lived all over the world. Here's how I ended up in strategy.</p>
+<div class="wrap">
+<div class="about" id="about">
+<div class="about-text" aria-live="polite">
+<h1 id="a-title">About.</h1>
+<p class="lead" id="a-lead">I'm a strategy student at BYU who likes building things.</p>
+<p class="body" id="a-body">I grew up all over the world, started college in computer science, and found out I like working with people more than code. Click a photo to see where I've been.</p>
+</div>
+<img class="big" id="a-img" src="photos/waterfall-sushi.jpg" alt="Weston by a waterfall, holding up a piece of sushi with chopsticks" style="object-position:40% 50%">
 </div>
 
-<div class="wrap">
-<ol class="story">
-<li><img src="photos/sf-early-years.jpg" alt="Weston as a little kid in a plaid shirt and bow tie" style="object-position:center 30%">
-<p class="place">San Francisco, Asia and Europe</p><h2>Growing up abroad</h2><p>I grew up in San Francisco, then lived around Asia and Europe, where I learned to sail and fell in love with the ocean and exploring new cities.</p></li>
+<ul class="thumbs" id="thumbs" aria-label="Pick a photo to read about it"></ul>
+</div>
 
-<li><img src="photos/kenya.jpg" alt="Weston with a group of people in Kenya">
-<p class="place">Africa</p><h2>Middle school</h2><p>In middle school we moved to Africa, which taught me humility and how to find joy in the little things.</p></li>
-
-<li><img src="photos/championship-trophy.jpg" alt="Weston holding a volleyball championship trophy" style="object-position:center 28%">
-<p class="place">Charlotte, North Carolina</p><h2>High school</h2><p>I moved to Charlotte and picked up volleyball, which taught me teamwork.</p></li>
-
-<li><img src="photos/boston-mission.jpg" alt="Weston and a fellow missionary in Massachusetts">
-<p class="place">Boston and New England</p><h2>Mission</h2><p>After high school I spent two years on a mission in Boston and around New England.</p></li>
-
-<li><img src="photos/singapore.jpg" alt="Weston in front of Marina Bay Sands in Singapore" style="object-position:center 40%">
-<p class="place">BYU and Singapore</p><h2>From code to people</h2><p>I started college in computer science because I love tech and problem solving, but I realized I liked working with people more than code. So I went to Singapore for an internship in strategy with a cybersecurity group.</p></li>
-
-<li><img src="photos/strategy-program.jpg" alt="BYU Marriott School Strategy Program group photo" style="object-position:center 68%">
-<p class="place">BYU Marriott School</p><h2>Strategy Program</h2><p>After Singapore I joined the Marriott School's Strategy Program, where I am now.</p></li>
-</ol>
+<div class="wrap game">
+<div>
+<h2>Beat my time</h2>
+<p>Think you're quick at Minesweeper? Clear the board without hitting a mine, and see if you can do it faster than me.</p>
+<p>Click to open a square. Right-click, or turn on Flag mode, to mark a mine.</p>
+<div class="times"><div><b id="t-you">0.0</b>Your time (seconds)</div><div><b id="t-me">—</b>Weston's time</div></div>
+<div class="gbtns"><button type="button" id="new">New game</button><button type="button" id="flag" aria-pressed="false">Flag mode</button></div>
+<p id="msg" role="status"></p>
+</div>
+<div class="board" id="board" role="group" aria-label="Minesweeper board, 9 by 9 with 10 mines"></div>
 </div>
 
 <footer><div class="wrap"><p><a class="totop" href="#" onclick="window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});return false">Weston Jackson</a></p><div class="links"><a class="icon" href="https://www.linkedin.com/in/weston-jackson42/" aria-label="LinkedIn"><img src="icons/linkedin.webp" alt="" width="26" height="26"></a><a class="icon" href="https://github.com/westons-hub" aria-label="GitHub"><img src="icons/github.svg" alt="" width="28" height="28"></a><a class="icon" href="https://www.youtube.com/channel/UCnmhHrcaIe1yvk1Fe79Xd9g" aria-label="YouTube"><img src="icons/youtube.png" alt="" width="31" height="22"></a><a class="icon" href="mailto:westonsdesk@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" aria-hidden="true" width="26" height="26" fill="none" stroke="#14295B" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg></a><a href="Weston_Jackson_Resume.pdf">Resume</a></div></div></footer>
+
+<script>
+// ---- photos: click one to change the heading, text and big picture ----
+(()=>{
+const items=[
+ {img:'waterfall-sushi.jpg',pos:'40% 50%',alt:'Weston by a waterfall, holding up a piece of sushi with chopsticks',title:'About.',lead:"I'm a strategy student at BYU who likes building things.",body:"I grew up all over the world, started college in computer science, and found out I like working with people more than code. Click a photo to see where I've been."},
+ {img:'sf-early-years.jpg',pos:'center 30%',alt:'Weston as a little kid in a plaid shirt and bow tie',title:'San Francisco.',lead:'Where it started.',body:'I grew up in San Francisco. Then we moved around Asia and Europe, where I learned to sail and fell in love with the ocean and exploring new cities.'},
+ {img:'kenya.jpg',pos:'center',alt:'Weston with a group of people in Kenya',title:'Kenya.',lead:'Middle school in Africa.',body:'Living in Africa taught me humility and how to find joy in the little things. I also helped build schools, libraries and wells in Kenya and Tanzania.'},
+ {img:'south-africa-monkey.jpg',pos:'center 20%',alt:'Weston with a monkey at a wildlife rehabilitation center in South Africa',title:'South Africa.',lead:'Wildlife rehabilitation.',body:'I worked at a rehabilitation center for monkeys in South Africa and earned a certificate in animal care.'},
+ {img:'championship-trophy.jpg',pos:'center 28%',alt:'Weston holding a volleyball championship trophy',title:'Charlotte.',lead:'Volleyball and teamwork.',body:'I moved to Charlotte for high school and picked up volleyball. We won two state championships, and I was team captain.'},
+ {img:'charlotte-ani.jpg',pos:'center 80%',alt:'Weston with his dog Ani',title:'Ani.',lead:'My dog.',body:'My favorite part of high school in Charlotte.'},
+ {img:'boston-mission.jpg',pos:'center',alt:'Weston and a fellow missionary in Massachusetts',title:'Boston.',lead:'Two years of service.',body:'After high school I spent two years as a missionary in Boston and around New England, talking with more than a thousand people from every kind of background.'},
+ {img:'singapore.jpg',pos:'center 40%',alt:'Weston in front of Marina Bay Sands in Singapore',title:'Singapore.',lead:'From code to people.',body:'I started college in computer science, then realized I liked working with people more than code. So I went to Singapore and South Korea for a strategy internship at a cybersecurity company.'},
+ {img:'strategy-program.jpg',pos:'center 68%',alt:'BYU Marriott School Strategy Program group photo',title:'BYU.',lead:'The Strategy Program.',body:"Now I study Strategic Management at BYU's Marriott School with a minor in computer science, and I build projects like Orbit and Query on the side."},
+ {img:'jackson-hole.jpg',pos:'center 40%',alt:'Weston in the mountains at Jackson Hole',title:'Outside.',lead:'Always planning the next trip.',body:"I surf, scuba dive and sail, and I've explored more than 80 countries on six continents. Antarctica is the one I have left."}];
+const box=document.getElementById('about'),list=document.getElementById('thumbs'),$=id=>document.getElementById(id);
+const quick=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function show(i){
+  const d=items[i];
+  const apply=()=>{$('a-title').textContent=d.title;$('a-lead').textContent=d.lead;$('a-body').textContent=d.body;const im=$('a-img');im.src='photos/'+d.img;im.alt=d.alt;im.style.objectPosition=d.pos;box.classList.remove('swap')};
+  list.querySelectorAll('button').forEach((b,j)=>b.setAttribute('aria-pressed',j===i));
+  if(quick){apply();return}
+  box.classList.add('swap');setTimeout(apply,200);
+}
+items.forEach((d,i)=>{
+  const li=document.createElement('li'),b=document.createElement('button'),im=document.createElement('img');
+  b.type='button';b.setAttribute('aria-pressed',i===0);b.setAttribute('aria-label',d.title.replace('.','')+': '+d.lead);
+  im.src='photos/'+d.img;im.alt='';im.style.objectPosition=d.pos;im.loading='lazy';
+  b.appendChild(im);b.addEventListener('click',()=>show(i));li.appendChild(b);list.appendChild(li);
+});
+})();
+
+// ---- Minesweeper: 9 x 9, 10 mines ----
+(()=>{
+const WESTON_TIME=null; // Weston's best time in seconds, e.g. 42.3 — fill this in
+const N=9,MINES=10,board=document.getElementById('board'),msg=document.getElementById('msg'),tYou=document.getElementById('t-you'),flagBtn=document.getElementById('flag');
+document.getElementById('t-me').textContent=WESTON_TIME==null?'—':WESTON_TIME.toFixed(1);
+let cells,mines,open,flags,started,over,t0,timer,flagMode=false;
+const idx=(r,c)=>r*N+c;
+const around=i=>{const r=Math.floor(i/N),c=i%N,o=[];for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++){const y=r+a,x=c+b;if((a||b)&&y>=0&&y<N&&x>=0&&x<N)o.push(idx(y,x))}return o};
+function reset(){
+  clearInterval(timer);mines=new Set();open=new Set();flags=new Set();started=false;over=false;tYou.textContent='0.0';msg.textContent='';
+  board.innerHTML='';cells=[];
+  for(let i=0;i<N*N;i++){const b=document.createElement('button');b.type='button';b.setAttribute('aria-label',`Row ${Math.floor(i/N)+1}, column ${i%N+1}, hidden`);
+    b.addEventListener('click',()=>flagMode?flag(i):reveal(i));
+    b.addEventListener('contextmenu',e=>{e.preventDefault();flag(i)});
+    board.appendChild(b);cells.push(b)}
+}
+function place(safe){const no=new Set([safe,...around(safe)]);while(mines.size<MINES){const i=Math.floor(Math.random()*N*N);if(!no.has(i))mines.add(i)}}
+function start(i){started=true;place(i);t0=performance.now();timer=setInterval(()=>{tYou.textContent=((performance.now()-t0)/1000).toFixed(1)},100)}
+function flag(i){if(over||open.has(i))return;const b=cells[i];if(flags.has(i)){flags.delete(i);b.textContent=''}else{flags.add(i);b.textContent='⚑'}b.setAttribute('aria-label',b.getAttribute('aria-label').replace(/, (hidden|flagged)$/,flags.has(i)?', flagged':', hidden'))}
+function reveal(i){
+  if(over||open.has(i)||flags.has(i))return;
+  if(!started)start(i);
+  if(mines.has(i))return end(false,i);
+  const q=[i];
+  while(q.length){const j=q.pop();if(open.has(j)||flags.has(j))continue;open.add(j);
+    const n=around(j).filter(k=>mines.has(k)).length,b=cells[j];b.classList.add('open');b.textContent=n||'';if(n)b.classList.add('n'+n);
+    b.setAttribute('aria-label',`Row ${Math.floor(j/N)+1}, column ${j%N+1}, ${n||'no'} mines nearby`);
+    if(!n)q.push(...around(j))}
+  if(open.size===N*N-MINES)end(true);
+}
+function end(won,hit){
+  over=true;clearInterval(timer);const t=(performance.now()-t0)/1000;tYou.textContent=t.toFixed(1);
+  mines.forEach(m=>{cells[m].textContent=won?'⚑':'●';if(!won)cells[m].classList.add('mine')});
+  if(!won)msg.textContent='You hit a mine. Try again.';
+  else if(WESTON_TIME==null)msg.textContent=`Cleared in ${t.toFixed(1)} seconds. Weston hasn't posted his time yet.`;
+  else msg.textContent=t<WESTON_TIME?`Cleared in ${t.toFixed(1)} seconds. You beat Weston by ${(WESTON_TIME-t).toFixed(1)}!`:`Cleared in ${t.toFixed(1)} seconds. Weston is still ${(t-WESTON_TIME).toFixed(1)} faster.`;
+}
+document.getElementById('new').addEventListener('click',reset);
+flagBtn.addEventListener('click',()=>{flagMode=!flagMode;flagBtn.setAttribute('aria-pressed',flagMode)});
+reset();
+})();
+</script>
 </body></html>
