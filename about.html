@@ -9,8 +9,13 @@
 .about .body{margin:0;max-width:44ch}
 .about .big{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:6px;transition:opacity .2s}
 .about.swap .about-text,.about.swap .big{opacity:0}
-.thumbs{list-style:none;margin:0;padding:28px 0 72px;display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
-.thumbs button{display:block;width:100%;padding:5px;background:#fff;border:1px solid var(--line);border-radius:4px;box-shadow:0 2px 6px #0000000f;cursor:pointer}
+.wheel{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:24px 0 64px}
+.wheel>button{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--ink);background:#fff;color:var(--ink);font-size:20px;line-height:1;cursor:pointer}
+.wheel>button:disabled{opacity:.3;cursor:default}
+.thumbs{list-style:none;margin:0;padding:6px 4px 12px;display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:thin}
+.thumbs li{flex:0 0 184px;scroll-snap-align:center}
+.thumbs button{display:block;width:100%;padding:5px;background:#fff;border:1px solid var(--line);border-radius:4px;box-shadow:0 2px 6px #0000000f;cursor:pointer;opacity:.6;transition:opacity .2s}
+.thumbs button:hover,.thumbs button[aria-pressed="true"]{opacity:1}
 .thumbs img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
 .thumbs button[aria-pressed="true"]{outline:2.5px solid var(--ink);outline-offset:2px}
 .thumbs button:focus-visible{outline:2.5px solid var(--accent);outline-offset:2px}
@@ -31,7 +36,7 @@
 .board button.open{background:#fff;cursor:default}
 .board button.mine{background:var(--accent);color:#fff}
 .board .n1{color:#1D4ED8}.board .n2{color:#15803D}.board .n3{color:#B8322A}.board .n4{color:#5B21B6}.board .n5{color:#92400E}.board .n6{color:#0E7490}.board .n7{color:#1c1b19}.board .n8{color:#6B7480}
-@media(max-width:760px){.about{grid-template-columns:1fr;gap:24px;padding:16px 0 28px}.about .big{order:-1}.about-text{min-height:230px;justify-content:flex-start}.thumbs{gap:8px;padding:20px 0 48px}.thumbs button{padding:3px}.game{grid-template-columns:1fr;gap:28px;padding:40px 16px 64px}.board{justify-self:center}}
+@media(max-width:760px){.about{grid-template-columns:1fr;gap:24px;padding:16px 0 28px}.about .big{order:-1}.about-text{min-height:230px;justify-content:flex-start}.wheel{padding:16px 0 44px;gap:6px}.wheel>button{width:34px;height:34px}.thumbs{gap:10px}.thumbs li{flex-basis:120px}.thumbs button{padding:3px}.game{grid-template-columns:1fr;gap:28px;padding:40px 16px 64px}.board{justify-self:center}}
 @media(prefers-reduced-motion:reduce){.about-text,.about .big{transition:none}}
 </style></head><body>
 <div class="wrap"><nav><a class="logo" href="index.html">Weston Jackson</a><a class="opt" href="about.html" aria-current="page">About</a><a class="opt" href="orbit.html">Orbit</a><a class="opt" href="query.html">Query</a><a class="btn" href="Weston_Jackson_Resume.pdf">Resume</a></nav></div>
@@ -46,7 +51,7 @@
 <img class="big" id="a-img" src="photos/waterfall-sushi.jpg" alt="Weston by a waterfall, holding up a piece of sushi with chopsticks" style="object-position:40% 50%">
 </div>
 
-<ul class="thumbs" id="thumbs" aria-label="Pick a photo to read about it"></ul>
+<div class="wheel"><button type="button" id="prev" aria-label="Previous photo">‹</button><ul class="thumbs" id="thumbs" aria-label="Pick a photo to read about it"></ul><button type="button" id="next" aria-label="Next photo">›</button></div>
 </div>
 
 <div class="wrap game">
@@ -79,8 +84,10 @@ const items=[
  {img:'jackson-hole.jpg',pos:'center 40%',alt:'Weston in the mountains at Jackson Hole',title:'Outside.',lead:'Always planning the next trip.',body:"I surf, scuba dive and sail, and I've explored more than 80 countries on six continents. Antarctica is the one I have left."}];
 const box=document.getElementById('about'),list=document.getElementById('thumbs'),$=id=>document.getElementById(id);
 const quick=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let cur=0;
 function show(i){
-  const d=items[i];
+  cur=i;const d=items[i];$('prev').disabled=i===0;$('next').disabled=i===items.length-1;
+  const li=list.children[i];if(li)list.scrollTo({left:li.offsetLeft-list.offsetLeft-(list.clientWidth-li.offsetWidth)/2,behavior:quick?'auto':'smooth'});
   const apply=()=>{$('a-title').textContent=d.title;$('a-lead').textContent=d.lead;$('a-body').textContent=d.body;const im=$('a-img');im.src='photos/'+d.img;im.alt=d.alt;im.style.objectPosition=d.pos;box.classList.remove('swap')};
   list.querySelectorAll('button').forEach((b,j)=>b.setAttribute('aria-pressed',j===i));
   if(quick){apply();return}
@@ -92,6 +99,8 @@ items.forEach((d,i)=>{
   im.src='photos/'+d.img;im.alt='';im.style.objectPosition=d.pos;im.loading='lazy';
   b.appendChild(im);b.addEventListener('click',()=>show(i));li.appendChild(b);list.appendChild(li);
 });
+$('prev').addEventListener('click',()=>show(Math.max(0,cur-1)));$('next').addEventListener('click',()=>show(Math.min(items.length-1,cur+1)));$('prev').disabled=true;
+list.addEventListener('wheel',e=>{if(Math.abs(e.deltaY)<=Math.abs(e.deltaX))return;const max=list.scrollWidth-list.clientWidth;if((e.deltaY<0&&list.scrollLeft<=0)||(e.deltaY>0&&list.scrollLeft>=max-1))return;e.preventDefault();list.scrollLeft+=e.deltaY},{passive:false});
 })();
 
 // ---- Minesweeper: 9 x 9, 10 mines ----
