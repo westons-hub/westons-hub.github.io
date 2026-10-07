@@ -48,8 +48,8 @@ footer .links{display:flex;gap:16px;align-items:center}
 .geo .trail{fill:none;stroke:url(#tg);stroke-width:3;stroke-linecap:round}
 .geo .link{stroke:#F97316;stroke-width:1.5;stroke-dasharray:4 6;opacity:.7}
 .geo text.you{fill:#1E3A5F;font-size:22px;font-weight:700}
-.stage[data-p="0"]{background:#1E3A5F}
-.stage[data-p="0"] .geo{opacity:1}
+.stage[data-p="1"]{background:#1E3A5F}
+.stage[data-p="1"] .geo{opacity:1}
 
 @media(max-width:860px){
 .slide{grid-template-columns:1fr;gap:20px;padding:72px 16px 24px;align-content:center}
@@ -81,7 +81,7 @@ article.slide:first-of-type{align-content:end}
 .hero-text{max-width:none;padding:8px 0 56px}}
 
 /* Query: green background and a small mock of question -> SQL -> answer */
-.stage[data-p="1"]{background-color:#0a6b4d;background-image:linear-gradient(#ffffff26 1px,transparent 1px),linear-gradient(90deg,#ffffff26 1px,transparent 1px);background-size:100% 28px,104px 100%}
+.stage[data-p="2"]{background-color:#0a6b4d;background-image:linear-gradient(#ffffff26 1px,transparent 1px),linear-gradient(90deg,#ffffff26 1px,transparent 1px);background-size:100% 28px,104px 100%}
 .qmock{display:block;justify-self:center;width:100%;max-width:540px;background:#fff;border-radius:10px;padding:24px;box-shadow:0 24px 50px -24px #00000080;color:#1c1b19;text-decoration:none;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
 .qmock .file{display:inline-block;font:12.5px ui-monospace,"SF Mono",Menlo,monospace;background:#e1f0e9;color:#0a6b4d;padding:3px 9px;border-radius:4px}
 .qmock .q{font-size:20px;font-weight:600;margin:14px 0 10px;color:#1c1b19}
@@ -102,3 +102,11 @@ article.slide:first-of-type{align-content:end}
 @keyframes qgrow{from{width:0}}
 @media(max-width:860px){.qmock{order:-1;padding:16px}.qmock .q{font-size:17px}}
 @media(prefers-reduced-motion:reduce){.qmock>*{opacity:1;animation:none!important}.qmock .bar span{animation:none!important}}
+
+/* the intro is the first layer of the pinned stage, so it cross-fades into Orbit like Orbit does into Query */
+.hero-slide{display:flex;flex-direction:column;align-items:stretch;gap:0;padding:0;background:var(--bg)}
+.hero-slide>.wrap{width:100%}
+.hero-slide .hero{flex:1;min-height:0}
+@media(max-width:640px){.hero-slide nav{padding:14px 0}.hero-slide .hero .photo{aspect-ratio:auto;height:26svh}.hero-slide .hero-text{padding:0 0 16px}.hero-slide .hero h1{font-size:42px;margin-bottom:10px}.hero-slide .tag{font-size:15.5px;margin-bottom:12px}.hero-slide .lede{line-height:1.5;font-size:16px}.hero-slide .btns{margin-top:18px;gap:10px}.hero-slide .pill{padding:11px 18px;font-size:15px}.hero-slide .social{margin-top:18px}}
+@media(max-width:640px) and (max-height:620px){.hero-slide .lede{display:none}}
+@media(max-width:860px){.slide:not(.hero-slide){padding:20px 16px;gap:14px}.qmock table tr:nth-child(n+4){display:none}.qmock pre{margin-bottom:8px}.qmock .q{margin:10px 0 8px}.note{padding:16px}.note p{margin-bottom:12px;font-size:16px;line-height:1.5}.note small{margin-bottom:12px}.note h3 img{height:36px}}
