@@ -54,7 +54,7 @@
 <h2>Beat my time</h2>
 <p>Think you're quick at Minesweeper? Clear the board without hitting a mine, and see if you can do it faster than me.</p>
 <p>Click to open a square. Right-click, or turn on Flag mode, to mark a mine.</p>
-<div class="times"><div><b id="t-you">0.0</b>Your time (seconds)</div><div><b id="t-me">—</b>Weston's time</div></div>
+<div class="times"><div><b id="t-you">0.0</b>Your time (seconds)</div><div><b id="t-me">30.8</b>Weston's time (first attempt)</div></div>
 <div class="gbtns"><button type="button" id="new">New game</button><button type="button" id="flag" aria-pressed="false">Flag mode</button></div>
 <p id="msg" role="status"></p>
 </div>
@@ -96,7 +96,7 @@ items.forEach((d,i)=>{
 
 // ---- Minesweeper: 9 x 9, 10 mines ----
 (()=>{
-const WESTON_TIME=null; // Weston's best time in seconds, e.g. 42.3 — fill this in
+const WESTON_TIME=30.8; // Weston's time in seconds (first attempt)
 const N=9,MINES=10,board=document.getElementById('board'),msg=document.getElementById('msg'),tYou=document.getElementById('t-you'),flagBtn=document.getElementById('flag');
 document.getElementById('t-me').textContent=WESTON_TIME==null?'—':WESTON_TIME.toFixed(1);
 let cells,mines,open,flags,started,over,t0,timer,flagMode=false;
